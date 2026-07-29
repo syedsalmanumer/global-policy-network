@@ -3,70 +3,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About Us | Global Policy Network</title>
-
-  <!-- Bootstrap 5 CSS -->
+  <title>Policy Unpacked | Global Policy Network</title>
+  <!-- Bootstrap 5 + Font Awesome + Google Fonts (Montserrat) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
-
-  <!-- Font Awesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-
-  <!-- Google Fonts: Montserrat (as used in your existing code) -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-
+  <!-- Animate.css for extra polish -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <style>
+    /* ----- GLOBAL STYLES (matching top design) ----- */
     :root {
-      --primary-color: #0B2F58;
+      --primary: #0B2F58;
       --primary-light: #1A4A7A;
-      --secondary-color: #598EA9;
-      --accent-color: #6DB2D6;
+      --secondary: #598EA9;
+      --accent: #6DB2D6;
       --light-bg: #FAF3E0;
       --light-bg-alt: #F8F5F0;
       --white: #FFFFFF;
       --text-dark: #0B2F58;
       --text-light: #5A6B7C;
-      --shadow-sm: 0 2px 12px rgba(11, 47, 88, 0.06);
-      --shadow-md: 0 10px 30px rgba(11, 47, 88, 0.08);
+      --shadow-sm: 0 2px 12px rgba(11,47,88,0.06);
+      --shadow-md: 0 10px 30px rgba(11,47,88,0.08);
       --radius: 14px;
       --transition: all 0.3s ease;
     }
-
-    * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-
+    * { -webkit-font-smoothing: antialiased; }
     body {
       font-family: 'Montserrat', sans-serif;
       color: var(--text-dark);
-      overflow-x: hidden;
       background: var(--white);
+      overflow-x: hidden;
     }
-
-    h1, h2, h3, h4, h5, h6 {
+    h1,h2,h3,h4,h5,h6 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       letter-spacing: -0.02em;
     }
-
     .section-padding { padding: 90px 0; }
-
     .section-title {
       font-size: 2.4rem;
       font-weight: 700;
       margin-bottom: 0.75rem;
     }
-
     .section-subtitle {
       font-size: 1.1rem;
       color: var(--text-light);
-      max-width: 700px;
-      margin: 0 auto 2.5rem;
+      max-width: 620px;
+      margin: 0 auto 3rem;
       font-weight: 400;
       line-height: 1.7;
     }
-
     .badge-soft {
       display: inline-block;
-      background: rgba(11, 47, 88, 0.08);
-      color: var(--primary-color);
+      background: rgba(11,47,88,0.08);
+      color: var(--primary);
       padding: 6px 18px;
       border-radius: 50px;
       font-size: 0.78rem;
@@ -75,10 +65,8 @@
       text-transform: uppercase;
       margin-bottom: 1rem;
     }
-
-    /* Buttons */
     .btn-primary-custom {
-      background: var(--primary-color);
+      background: var(--primary);
       color: #fff;
       padding: 13px 32px;
       border-radius: 50px;
@@ -93,9 +81,8 @@
       background: var(--primary-light);
       color: #fff;
       transform: translateY(-2px);
-      box-shadow: 0 8px 22px rgba(11, 47, 88, 0.22);
+      box-shadow: 0 8px 22px rgba(11,47,88,0.22);
     }
-
     .btn-outline-custom {
       background: transparent;
       color: #fff;
@@ -110,12 +97,11 @@
     }
     .btn-outline-custom:hover {
       background: #fff;
-      color: var(--primary-color);
+      color: var(--primary);
       transform: translateY(-2px);
     }
-
     .btn-accent {
-      background: var(--accent-color);
+      background: var(--accent);
       color: #fff;
       padding: 12px 30px;
       border-radius: 50px;
@@ -130,86 +116,57 @@
       background: #5AA0C4;
       color: #fff;
       transform: translateY(-2px);
-      box-shadow: 0 8px 22px rgba(109, 178, 214, 0.3);
+      box-shadow: 0 8px 22px rgba(109,178,214,0.3);
     }
-
-    /* Navbar (unchanged from your design) */
-    .navbar-custom {
-      background: rgba(11, 47, 88, 0.94);
-      backdrop-filter: blur(12px);
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .navbar-custom .navbar-brand img { height: 88px; width: auto; }
-    .navbar-custom .nav-link {
-      color: rgba(255,255,255,0.88) !important;
-      font-weight: 500;
-      font-size: 0.94rem;
-      padding: 8px 16px !important;
-      border-radius: 8px;
-      transition: var(--transition);
-    }
-    .navbar-custom .nav-link:hover,
-    .navbar-custom .nav-link.active {
-      color: #fff !important;
-      background: rgba(255,255,255,0.1);
-    }
-    .navbar-custom .dropdown-menu {
-      background: rgba(11, 47, 88, 0.98);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 12px;
-      padding: 8px;
-      margin-top: 8px;
-    }
-    .navbar-custom .dropdown-item {
-      color: rgba(255,255,255,0.88);
-      padding: 10px 18px;
-      border-radius: 8px;
-      font-weight: 400;
-    }
-    .navbar-custom .dropdown-item:hover {
-      background: rgba(255,255,255,0.1);
-      color: #fff;
-    }
-    .navbar-custom .btn-join {
-      background: var(--accent-color);
-      color: #fff;
-      padding: 9px 26px;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      text-decoration: none;
-      transition: var(--transition);
-    }
-    .navbar-custom .btn-join:hover {
-      background: #5AA0C4;
-      transform: translateY(-2px);
-    }
-    .navbar-toggler { border: none; }
-    .navbar-toggler:focus { box-shadow: none; }
-    .navbar-toggler-icon {
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,0.85)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-    }
-
-    /* Hero */
+    /* ----- HERO (overlay with carousel) ----- */
     .hero-section {
       position: relative;
-      min-height: 60vh;
+      min-height: 88vh;
       display: flex;
       align-items: center;
       overflow: hidden;
-      background: var(--primary-color);
+    }
+    .hero-carousel {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-carousel .carousel-inner,
+    .hero-carousel .carousel-item { height: 100%; }
+    .hero-carousel .carousel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hero-carousel .carousel-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(11,47,88,0.88) 0%, rgba(11,47,88,0.65) 50%, rgba(11,47,88,0.45) 100%);
+      z-index: 1;
     }
     .hero-section .container { position: relative; z-index: 2; }
-    .hero-section h1 {
-      font-size: 3.5rem;
-      font-weight: 300;
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(8px);
+      padding: 8px 20px;
+      border-radius: 50px;
       color: #fff;
-      line-height: 1.15;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 22px;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .hero-section h1 {
+      font-size: 4rem;
+      font-weight: 400;
+      color: #fff;
+      line-height: 1.12;
       margin-bottom: 18px;
+      padding-top: 80px;
     }
     .hero-section h1 .highlight {
-      background: linear-gradient(135deg, var(--accent-color), #8AD0F0);
+      background: linear-gradient(135deg, var(--accent), #8AD0F0);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -217,7 +174,7 @@
     .hero-divider {
       width: 72px;
       height: 3px;
-      background: var(--accent-color);
+      background: var(--accent);
       border-radius: 2px;
       margin-bottom: 24px;
     }
@@ -229,99 +186,99 @@
       font-weight: 300;
       margin-bottom: 32px;
     }
-    .hero-buttons { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 10px; }
-
-    /* Cards / Sections */
-    .mission-card {
+    /* ----- PODCAST CARDS (episode grid) ----- */
+    .podcast-grid .podcast-card {
       background: #fff;
       border-radius: var(--radius);
-      padding: 36px 28px;
+      overflow: hidden;
       height: 100%;
-      border: 1px solid rgba(11,47,88,0.05);
+      border: 1px solid rgba(11,47,88,0.06);
       box-shadow: var(--shadow-sm);
       transition: var(--transition);
     }
-    .mission-card:hover {
+    .podcast-grid .podcast-card:hover {
       transform: translateY(-6px);
       box-shadow: var(--shadow-md);
     }
-    .mission-card .icon-box {
-      width: 52px;
-      height: 52px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.35rem;
-      margin-bottom: 18px;
+    .podcast-card .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      background: #000;
     }
-    .mission-card .icon-box.blue { background: rgba(11,47,88,0.1); color: var(--primary-color); }
-    .mission-card .icon-box.teal { background: rgba(89,142,169,0.12); color: var(--secondary-color); }
-    .mission-card .icon-box.gold { background: rgba(184,134,11,0.1); color: #B8860B; }
-    .mission-card h4 { font-size: 1.2rem; margin-bottom: 10px; }
-    .mission-card p { color: var(--text-light); font-size: 0.95rem; line-height: 1.65; margin: 0; }
-
-    .stat-card {
+    .podcast-card .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .podcast-card .card-body {
+      padding: 22px;
+    }
+    .podcast-card .card-body .episode-tag {
+      display: inline-block;
+      background: rgba(11,47,88,0.07);
+      color: var(--primary);
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 10px;
+    }
+    .podcast-card .card-body h4 {
+      font-size: 1.12rem;
+      margin-bottom: 8px;
+    }
+    .podcast-card .card-body p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+    /* ----- GUEST SECTION (avatars) ----- */
+    .guest-grid .guest-item {
+      text-align: center;
       background: #fff;
       border-radius: var(--radius);
-      padding: 30px 20px;
-      text-align: center;
-      box-shadow: var(--shadow-sm);
-      transition: var(--transition);
+      padding: 24px 16px;
       border: 1px solid rgba(11,47,88,0.05);
-    }
-    .stat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .stat-card .stat-number {
-      font-size: 2.8rem;
-      font-weight: 800;
-      color: var(--primary-color);
-      line-height: 1.2;
-    }
-    .stat-card .stat-label { color: var(--text-light); font-weight: 500; margin-top: 8px; }
-
-    .team-card {
-      background: #fff;
-      border-radius: var(--radius);
-      overflow: hidden;
       box-shadow: var(--shadow-sm);
       transition: var(--transition);
-      text-align: center;
-    }
-    .team-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
-    .team-card .team-image {
-      height: 240px;
-      background: var(--light-bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3.5rem;
-      color: var(--secondary-color);
-    }
-    .team-card .team-body { padding: 22px; }
-    .team-card h5 { font-size: 1.1rem; margin-bottom: 4px; }
-    .team-card .team-role { color: var(--text-light); font-size: 0.9rem; font-weight: 400; }
-
-    .testimonial-card {
-      background: #fff;
-      border-radius: var(--radius);
-      padding: 30px;
-      box-shadow: var(--shadow-sm);
-      border-left: 4px solid var(--accent-color);
       height: 100%;
     }
-    .testimonial-card i { color: var(--accent-color); font-size: 1.8rem; opacity: 0.6; margin-bottom: 14px; }
-    .testimonial-card p { font-style: italic; color: var(--text-dark); font-weight: 400; line-height: 1.7; }
-    .testimonial-card .testimonial-author { font-weight: 600; margin-top: 12px; color: var(--primary-color); }
-    .testimonial-card .testimonial-role { font-size: 0.85rem; color: var(--text-light); }
-
-    /* CTA */
-    .cta-section {
-      background: linear-gradient(135deg, var(--primary-color), #1A4A7A);
-      padding: 80px 0;
-      position: relative;
-      overflow: hidden;
+    .guest-grid .guest-item:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
     }
-    .cta-section h2 { color: #fff; font-size: 2.3rem; }
+    .guest-item .guest-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 16px;
+      display: block;
+      border: 3px solid var(--secondary);
+    }
+    .guest-item h5 {
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+    .guest-item p {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin: 0;
+    }
+    /* ----- CTA SECTION (blue gradient) ----- */
+    .cta-section {
+      background: linear-gradient(135deg, var(--primary), #1A4A7A);
+      padding: 80px 0;
+      color: #fff;
+    }
+    .cta-section h2 { font-size: 2.3rem; }
     .cta-section p {
       color: rgba(255,255,255,0.85);
       font-size: 1.1rem;
@@ -329,7 +286,7 @@
       line-height: 1.7;
     }
     .btn-cta {
-      background: var(--accent-color);
+      background: var(--accent);
       color: #fff;
       padding: 14px 38px;
       border-radius: 50px;
@@ -345,14 +302,13 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 26px rgba(109,178,214,0.35);
     }
-
-    /* Footer (unchanged) */
+    /* ----- FOOTER (matches top design) ----- */
     .footer-section {
-      background: var(--primary-color);
+      background: var(--primary);
       color: rgba(255,255,255,0.8);
       padding: 60px 0 28px;
     }
-    .footer-logo { height: 48px; width: auto; margin-bottom: 16px; }
+    .footer-section .footer-logo { height: 48px; margin-bottom: 16px; }
     .footer-about {
       font-size: 0.9rem;
       line-height: 1.7;
@@ -365,7 +321,7 @@
       font-size: 1rem;
       margin-bottom: 18px;
     }
-    .footer-links { list-style: none; padding: 0; margin: 0; }
+    .footer-links { list-style: none; padding: 0; }
     .footer-links li { margin-bottom: 10px; }
     .footer-links a {
       color: rgba(255,255,255,0.7);
@@ -389,7 +345,7 @@
       text-decoration: none;
     }
     .social-links a:hover {
-      background: var(--accent-color);
+      background: var(--accent);
       color: #fff;
       transform: translateY(-3px);
     }
@@ -399,378 +355,402 @@
       margin-top: 40px;
       font-size: 0.85rem;
       color: rgba(255,255,255,0.5);
+      text-align: center;
     }
-
+    /* ----- ANIMATION HELPERS (custom fade-up) ----- */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* ----- Hero platform links (Spotify, Apple, YouTube) ----- */
+    .hero-platform-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(4px);
+      padding: 10px 22px;
+      border-radius: 50px;
+      color: #fff;
+      font-weight: 500;
+      text-decoration: none;
+      transition: var(--transition);
+      border: 1px solid rgba(255,255,255,0.15);
+      font-size: 0.95rem;
+    }
+    .hero-platform-links a:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+    .hero-platform-links a i {
+      font-size: 1.2rem;
+    }
+    @media (max-width: 768px) {
+      .hero-platform-links a {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+      }
+    }
+    /* responsive */
     @media (max-width: 991px) {
       .hero-section h1 { font-size: 2.7rem; }
       .section-title { font-size: 2rem; }
-      .navbar-custom .navbar-collapse {
-        background: rgba(11,47,88,0.98);
-        padding: 18px;
-        border-radius: 12px;
-        margin-top: 10px;
-      }
     }
     @media (max-width: 768px) {
-      .hero-section { min-height: 50vh; text-align: center; }
+      .hero-section { min-height: 78vh; text-align: center; }
       .hero-section h1 { font-size: 2.15rem; }
       .hero-section p { font-size: 1rem; margin-left: auto; margin-right: auto; }
       .hero-divider { margin-left: auto; margin-right: auto; }
-      .hero-buttons { justify-content: center; }
       .section-padding { padding: 60px 0; }
       .section-title { font-size: 1.75rem; }
-      .cta-section h2 { font-size: 1.9rem; }
-      .footer-section { text-align: center; }
-      .footer-about { margin: 0 auto 20px; max-width: 100%; }
-      .social-links { justify-content: center; }
-    }
-    @media (max-width: 576px) {
-      .hero-section h1 { font-size: 1.85rem; }
+      .hero-platform-links { justify-content: center; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ========== NAVBAR (unchanged) ========== -->
-  <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">
-        <img src="https://static.wixstatic.com/media/3109a0_92620ec4c9944adbaa85b32eefc65a5e~mv2.png/v1/crop/x_0,y_3,w_500,h_494/fill/w_89,h_106,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Untitled%20design%20(1).png" alt="Global Policy Network">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto align-items-lg-center">
-          <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown">About Us</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Our Team</a></li>
-              <li><a class="dropdown-item" href="#">Our Partners</a></li>
-              <li><a class="dropdown-item" href="#">Fellowship</a></li>
-              <li><a class="dropdown-item" href="#">Consultancy</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Events</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Policy Series</a></li>
-              <li><a class="dropdown-item" href="#">Webinars</a></li>
-              <li><a class="dropdown-item" href="#">Conferences</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Publications</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Blog</a></li>
-              <li><a class="dropdown-item" href="#">Reports</a></li>
-              <li><a class="dropdown-item" href="#">Research</a></li>
-              <li><a class="dropdown-item" href="#">Podcast</a></li>
-            </ul>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="#">Membership</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
-          <li class="nav-item ms-lg-3"><a class="btn-join" href="#">Join Us</a></li>
+<!-- ========== NAVBAR (simplified, matching top design) ========== -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top animate__animated animate__fadeInDown" style="background: rgba(11,47,88,0.94); backdrop-filter: blur(12px); padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06);">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <img src="https://static.wixstatic.com/media/3109a0_92620ec4c9944adbaa85b32eefc65a5e~mv2.png/v1/crop/x_0,y_3,w_500,h_494/fill/w_89,h_106,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Untitled%20design%20(1).png" alt="Global Policy Network" style="height: 88px; width: auto;">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">About Us</a>
+          <ul class="dropdown-menu" style="background: rgba(11,47,88,0.98); border: 1px solid rgba(255,255,255,0.08);">
+            <li><a class="dropdown-item" href="#">Our Team</a></li>
+            <li><a class="dropdown-item" href="#">Our Partners</a></li>
+            <li><a class="dropdown-item" href="#">Fellowship</a></li>
+            <li><a class="dropdown-item" href="#">Consultancy</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Events</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Policy Series</a></li>
+            <li><a class="dropdown-item" href="#">Webinars</a></li>
+            <li><a class="dropdown-item" href="#">Conferences</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Publications</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Blog</a></li>
+            <li><a class="dropdown-item" href="#">Reports</a></li>
+            <li><a class="dropdown-item" href="#">Research</a></li>
+            <li><a class="dropdown-item" href="#">Podcast</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="#">Membership</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
+        <li class="nav-item ms-lg-3"><a class="btn" href="#" style="background: var(--accent); color: #fff; padding: 9px 26px; border-radius: 50px; font-weight: 600; font-size: 0.9rem; text-decoration: none;">Join Us</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ========== HERO (updated with platform links) ========== -->
+<section class="hero-section" id="home">
+  <div id="heroCarousel" class="carousel slide hero-carousel" data-bs-ride="carousel" data-bs-interval="5500">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="https://static.wixstatic.com/media/3109a0_8ffa6cb85a2e439993fb5ca79356f40b~mv2.jpg/v1/fill/w_1920,h_1080,al_c,q_85,enc_avif/3109a0_8ffa6cb85a2e439993fb5ca79356f40b~mv2.jpg" alt="Global Policy Network">
+      </div>
+      <div class="carousel-item">
+        <img src="https://static.wixstatic.com/media/3109a0_fb8b0401111d4571b8f210aa10b47f25~mv2.jpg/v1/fill/w_1920,h_1080,al_c,q_85,enc_avif/3109a0_fb8b0401111d4571b8f210aa10b47f25~mv2.jpg" alt="Global Policy Network">
+      </div>
+      <div class="carousel-item">
+        <img src="https://static.wixstatic.com/media/3109a0_15800cc9b5914cc18284ea8749cf175c~mv2.jpg/v1/fill/w_1920,h_1080,al_c,q_85,enc_avif/3109a0_15800cc9b5914cc18284ea8749cf175c~mv2.jpg" alt="Global Policy Network">
+      </div>
+    </div>
+    <div class="carousel-overlay"></div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-xl-7 animate__animated animate__fadeInUp">
+        <div class="hero-badge"><i class="fas fa-microphone-alt me-2"></i> Podcast</div>
+        <h1>Policy <span class="highlight">Unpacked</span></h1>
+        <div class="hero-divider"></div>
+        <p>
+          Voices. Insights. Policy Redefined. Clear, jargon-free discussions for policymakers, professionals, and policy-curious minds.
+        </p>
+        <!-- platform links: Spotify, Apple Podcasts, YouTube -->
+        <div class="hero-platform-links d-flex flex-wrap gap-3 mt-4">
+          <a href="https://open.spotify.com/show/27G4MszPLpmJ3AGV1mRBk6" target="_blank"><i class="fab fa-spotify"></i> Spotify</a>
+          <a href="#" target="_blank"><i class="fab fa-apple"></i> Apple Podcasts</a>
+          <a href="https://youtube.com/@globalpolicynetwork" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+        </div>
+        <p class="mt-3" style="font-size: 0.95rem; opacity: 0.8; max-width: 100%;">
+          Full episodes available on Spotify, Apple Podcasts and YouTube
+        </p>
+        <div class="hero-buttons mt-4">
+          <a href="#podcast-grid" class="btn-primary-custom"><i class="fas fa-play me-2"></i> Explore Episodes</a>
+          <a href="#guests" class="btn-outline-custom"><i class="fas fa-users me-2"></i> Meet Our Guests</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ABOUT THE PODCAST ========== -->
+<section class="section-padding" style="background: var(--light-bg-alt);">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-5 mb-4 mb-lg-0 text-center fade-up">
+        <img src="https://static.wixstatic.com/media/3109a0_a6ff4bb3628649599052dd26b4710a8e~mv2.png/v1/fill/w_295,h_293,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/3109a0_a6ff4bb3628649599052dd26b4710a8e~mv2.png" alt="Podcast Logo" style="max-width: 280px; border-radius: 20px; box-shadow: var(--shadow-md);">
+      </div>
+      <div class="col-lg-7 fade-up">
+        <span class="badge-soft"><i class="fas fa-info-circle me-2"></i> About</span>
+        <h2 class="section-title" style="font-size: 2.2rem;">Welcome to Policy Unpacked</h2>
+        <p style="font-size: 1.05rem; color: var(--text-light); line-height: 1.8;">
+          A podcast by Global Policy Network. We dive into the policies shaping our world — from healthcare to sustainability to education — and explore how these critical areas intersect to drive meaningful change.
+        </p>
+        <p style="font-size: 1rem; color: var(--text-light); line-height: 1.7;">
+          Each episode offers clear, jargon-free discussions designed for policymakers, professionals, and policy-curious minds alike.
+        </p>
+        <div class="mt-4">
+          <a href="https://open.spotify.com/show/27G4MszPLpmJ3AGV1mRBk6" target="_blank" class="btn-accent me-2"><i class="fab fa-spotify me-2"></i> Spotify</a>
+          <a href="https://youtube.com/@globalpolicynetwork" target="_blank" class="btn-accent"><i class="fab fa-youtube me-2"></i> YouTube</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PODCAST SERIES (cards) ========== -->
+<section class="section-padding" style="background: var(--white);">
+  <div class="container">
+    <div class="row text-center mb-5 fade-up">
+      <div class="col-lg-8 mx-auto">
+        <span class="badge-soft"><i class="fas fa-layer-group me-2"></i> Series</span>
+        <h2 class="section-title">Podcast Series</h2>
+        <p class="section-subtitle">Explore our curated series — from medicines policy to AI in healthcare.</p>
+      </div>
+    </div>
+    <div class="row g-4">
+      <!-- Series 1 -->
+      <div class="col-md-4 fade-up">
+        <div class="podcast-card" style="padding: 24px; background: #f8f9fa; border-radius: var(--radius); height: 100%;">
+          <div style="background: var(--primary-light); color: #fff; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px;">
+            <i class="fas fa-user-md me-2"></i> Advisors & Associates
+          </div>
+          <p style="font-size: 0.95rem; color: var(--text-light);">Conversations with GPN healthcare leaders on AI, technology, workforce wellbeing and digital transformation.</p>
+        </div>
+      </div>
+      <!-- Series 2 -->
+      <div class="col-md-4 fade-up">
+        <div class="podcast-card" style="padding: 24px; background: #f8f9fa; border-radius: var(--radius); height: 100%;">
+          <div style="background: var(--secondary); color: #fff; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px;">
+            <i class="fas fa-pills me-2"></i> Medicines in the 10-Year Plan
+          </div>
+          <p style="font-size: 0.95rem; color: var(--text-light);">Hosted by Stephen Riley — exploring access, optimisation, workforce and system integration in the NHS 10-Year Plan.</p>
+        </div>
+      </div>
+      <!-- Series 3 -->
+      <div class="col-md-4 fade-up">
+        <div class="podcast-card" style="padding: 24px; background: #f8f9fa; border-radius: var(--radius); height: 100%;">
+          <div style="background: var(--accent); color: #fff; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px;">
+            <i class="fas fa-file-alt me-2"></i> Policy Reports
+          </div>
+          <p style="font-size: 0.95rem; color: var(--text-light);">Unpacking GPN’s latest reports on medicines, primary care and health system transformation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== EPISODE GRID (embedded YouTube) ========== -->
+<section class="section-padding" id="podcast-grid" style="background: var(--light-bg-alt);">
+  <div class="container">
+    <div class="row text-center mb-5 fade-up">
+      <div class="col-lg-8 mx-auto">
+        <span class="badge-soft"><i class="fas fa-video me-2"></i> Episodes</span>
+        <h2 class="section-title">Latest Episodes</h2>
+        <p class="section-subtitle">Full episodes available on YouTube, Spotify and Apple Podcasts.</p>
+      </div>
+    </div>
+    <div class="row g-4 podcast-grid">
+      <!-- Episode 1 -->
+      <div class="col-md-4 fade-up">
+        <div class="podcast-card">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/6qxK9qCdWbQ" allowfullscreen></iframe>
+          </div>
+          <div class="card-body">
+            <span class="episode-tag">Advisors & Associates</span>
+            <h4>AI & Healthcare Workforce</h4>
+            <p>Exploring the role of AI in workforce wellbeing and digital transformation.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Episode 2 -->
+      <div class="col-md-4 fade-up">
+        <div class="podcast-card">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+          </div>
+          <div class="card-body">
+            <span class="episode-tag">Medicines in the 10-Year Plan</span>
+            <h4>Medicines Optimisation</h4>
+            <p>Stephen Riley discusses access, workforce and system integration.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Episode 3 -->
+      <div class="col-md-4 fade-up">
+        <div class="podcast-card">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/9bZkp7q19f0" allowfullscreen></iframe>
+          </div>
+          <div class="card-body">
+            <span class="episode-tag">Policy Reports</span>
+            <h4>Primary Care Transformation</h4>
+            <p>Insights from GPN’s latest report on neighbourhood care models.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-5 fade-up">
+      <a href="https://youtube.com/@globalpolicynetwork" target="_blank" class="btn-accent"><i class="fab fa-youtube me-2"></i> View All on YouTube</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== GUESTS (previous guests) ========== -->
+<section class="section-padding" id="guests" style="background: var(--white);">
+  <div class="container">
+    <div class="row text-center mb-5 fade-up">
+      <div class="col-lg-8 mx-auto">
+        <span class="badge-soft"><i class="fas fa-user-tie me-2"></i> Guests</span>
+        <h2 class="section-title">Previous Guests Include</h2>
+        <p class="section-subtitle">Leading voices in policy, health, and innovation.</p>
+      </div>
+    </div>
+    <div class="row g-4 guest-grid">
+      <div class="col-md-3 col-6 fade-up">
+        <div class="guest-item">
+          <img class="guest-avatar" src="https://static.wixstatic.com/media/3109a0_e76ce327e17448ca858a954a78cd4789~mv2.jpeg/v1/crop/x_248,y_0,w_924,h_925/fill/w_225,h_225,al_c,q_80,usm_0.66_1.00_0.01,enc_avif/stephen.jpeg" alt="Stephen Riley">
+          <h5>Stephen Riley</h5>
+          <p>Deputy Chief Pharmacist, NHS England</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-6 fade-up">
+        <div class="guest-item">
+          <img class="guest-avatar" src="https://static.wixstatic.com/media/3109a0_043b81b50dad4efc8b0caa24d9e07c66~mv2.jpg/v1/fill/w_225,h_225,al_c,q_80,usm_0.66_1.00_0.01,enc_avif/right_arrows_1.jpg" alt="Azuka Okeke">
+          <h5>Azuka Okeke</h5>
+          <p>CEO, Africa Resource Centre</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-6 fade-up">
+        <div class="guest-item">
+          <img class="guest-avatar" src="https://static.wixstatic.com/media/3109a0_73bac3c7fa9f4b6689f8ec62530c3343~mv2.jpg/v1/fill/w_225,h_225,al_c,q_80,usm_0.66_1.00_0.01,enc_avif/Chris-Lo-HKTDC-regional-director-171007.jpg" alt="Chris Lo">
+          <h5>Chris Lo</h5>
+          <p>Regional Director, HK Trade Development</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-6 fade-up">
+        <div class="guest-item">
+          <img class="guest-avatar" src="https://static.wixstatic.com/media/3109a0_0b58870402194160a7ddb1c194e14f27~mv2.jpg/v1/crop/x_20,y_0,w_3580,h_3580/fill/w_225,h_225,al_c,q_80,usm_0.66_1.00_0.01,enc_avif/Picsart_25-03-25_22-13-00-311%5B1%5D.jpg" alt="Yousaf Ahmad">
+          <h5>Yousaf Ahmad</h5>
+          <p>ICS Chief Pharmacist, NHS Frimley</p>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-4 fade-up">
+      <p style="font-weight: 600; color: var(--primary);"><i class="fas fa-plus-circle me-1"></i> …Plus Many More!</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CTA ========== -->
+<section class="cta-section">
+  <div class="container">
+    <div class="row align-items-center text-center text-lg-start">
+      <div class="col-lg-8 fade-up">
+        <h2>Want to Get Involved?</h2>
+        <p>Join our network of policy experts, researchers and changemakers. Together we’re building a more equitable and sustainable future.</p>
+      </div>
+      <div class="col-lg-4 text-center text-lg-end mt-4 mt-lg-0 fade-up">
+        <a href="https://forms.office.com/r/WjHFgL2Rdp" target="_blank" class="btn-cta"><i class="fas fa-handshake me-2"></i> Contact Us Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer-section">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4 fade-up">
+        <img src="https://static.wixstatic.com/media/3109a0_92620ec4c9944adbaa85b32eefc65a5e~mv2.png/v1/crop/x_0,y_3,w_500,h_494/fill/w_89,h_106,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Untitled%20design%20(1).png" alt="Global Policy Network" class="footer-logo">
+        <p class="footer-about">Where Policy Meets Implementation. An independent global policy institute dedicated to creating positive societal impact through evidence-based advocacy and innovation.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-x-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 fade-up">
+        <h5>Quick Links</h5>
+        <ul class="footer-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Our Work</a></li>
+          <li><a href="#">Fellowship</a></li>
+          <li><a href="#">Partnership</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2 fade-up">
+        <h5>Legal</h5>
+        <ul class="footer-links">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+          <li><a href="#">Accessibility</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3 fade-up">
+        <h5>Get in Touch</h5>
+        <ul class="footer-links">
+          <li><a href="mailto:info@globalpolicynetwork.com"><i class="fas fa-envelope me-2"></i> info@globalpolicynetwork.com</a></li>
+          <li><a href="#"><i class="fas fa-map-marker-alt me-2"></i> 128 City Road, London EC1V 2NX</a></li>
+          <li style="font-size:0.82rem; color:rgba(255,255,255,0.5);">Registered in England &amp; Wales 16698102</li>
         </ul>
       </div>
     </div>
-  </nav>
+    <div class="footer-bottom fade-up">&copy; 2026 Global Policy Network. All rights reserved.</div>
+  </div>
+</footer>
 
-  <!-- ========== HERO (simplified, no carousel) ========== -->
-  <section class="hero-section" id="about-hero">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-xl-7">
-          <div class="hero-badge" style="display:inline-block; background:rgba(255,255,255,0.12); backdrop-filter:blur(8px); padding:8px 20px; border-radius:50px; color:#fff; font-size:0.85rem; font-weight:500; margin-bottom:22px; border:1px solid rgba(255,255,255,0.12);">
-            <i class="fas fa-info-circle me-2"></i> About Us
-          </div>
-          <h1>Driving Policy <span class="highlight">Forward</span></h1>
-          <div class="hero-divider"></div>
-          <p>
-            We are a globally focused, independent policy institute driving positive societal change through evidence-based advocacy, strategic partnerships, and innovative solutions. Our mission is to shape policies that improve outcomes in health, education, and sustainability.
-          </p>
-          <div class="hero-buttons">
-            <a href="#mission" class="btn-primary-custom">
-              <i class="fas fa-arrow-right me-2"></i> Our Mission
-            </a>
-            <a href="#team" class="btn-outline-custom">
-              <i class="fas fa-users me-2"></i> Meet the Team
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== MISSION & VALUES ========== -->
-  <section class="section-padding" id="mission" style="background: var(--light-bg-alt);">
-    <div class="container">
-      <div class="row text-center mb-5">
-        <div class="col-lg-8 mx-auto">
-          <span class="badge-soft"><i class="fas fa-bullseye me-2"></i> Our Mission</span>
-          <h2 class="section-title">Creating Positive Societal Impact</h2>
-          <p class="section-subtitle">
-            We combine thought leadership, independent research, and stakeholder mobilisation to turn insight into action and close the gap between evidence and implementation.
-          </p>
-        </div>
-      </div>
-
-      <div class="row g-4">
-        <div class="col-md-4">
-          <div class="mission-card">
-            <div class="icon-box blue"><i class="fas fa-heartbeat"></i></div>
-            <h4>Health</h4>
-            <p>Shaping policies that improve health outcomes through evidence-based advocacy, medicines optimisation, primary care transformation, and equitable access.</p>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="mission-card">
-            <div class="icon-box teal"><i class="fas fa-graduation-cap"></i></div>
-            <h4>Education</h4>
-            <p>Supporting inclusive and innovative education policies that empower learners and strengthen systems through research and cross-sector collaboration.</p>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="mission-card">
-            <div class="icon-box gold"><i class="fas fa-leaf"></i></div>
-            <h4>Sustainability</h4>
-            <p>Championing sustainable development through policy innovation, strategic partnerships, and practical solutions aligned with global goals.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="row mt-5">
-        <div class="col-lg-10 mx-auto">
-          <div class="row g-4 text-center">
-            <div class="col-md-4">
-              <h5 class="fw-bold mb-2">Integrity</h5>
-              <p class="text-muted small mb-0">We act with honesty, transparency, and respect in all our engagements.</p>
-            </div>
-            <div class="col-md-4">
-              <h5 class="fw-bold mb-2">Innovation</h5>
-              <p class="text-muted small mb-0">We champion creative and evidence-based approaches to global challenges.</p>
-            </div>
-            <div class="col-md-4">
-              <h5 class="fw-bold mb-2">Collaboration</h5>
-              <p class="text-muted small mb-0">We connect people, ideas, and solutions across sectors and borders.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== STATS ========== -->
-  <section class="section-padding" style="background: #fff;">
-    <div class="container">
-      <div class="row text-center mb-5">
-        <div class="col-lg-8 mx-auto">
-          <span class="badge-soft"><i class="fas fa-chart-line me-2"></i> Our Impact</span>
-          <h2 class="section-title">By the Numbers</h2>
-          <p class="section-subtitle">Making a measurable difference across the globe.</p>
-        </div>
-      </div>
-      <div class="row g-4">
-        <div class="col-md-3 col-6">
-          <div class="stat-card">
-            <div class="stat-number">15+</div>
-            <div class="stat-label">Policy Reports</div>
-          </div>
-        </div>
-        <div class="col-md-3 col-6">
-          <div class="stat-card">
-            <div class="stat-number">30+</div>
-            <div class="stat-label">Roundtables</div>
-          </div>
-        </div>
-        <div class="col-md-3 col-6">
-          <div class="stat-card">
-            <div class="stat-number">50+</div>
-            <div class="stat-label">Expert Contributors</div>
-          </div>
-        </div>
-        <div class="col-md-3 col-6">
-          <div class="stat-card">
-            <div class="stat-number">10+</div>
-            <div class="stat-label">Countries</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== TEAM ========== -->
-  <section class="section-padding" id="team" style="background: var(--light-bg-alt);">
-    <div class="container">
-      <div class="row text-center mb-5">
-        <div class="col-lg-8 mx-auto">
-          <span class="badge-soft"><i class="fas fa-user-tie me-2"></i> Leadership</span>
-          <h2 class="section-title">Meet Our Team</h2>
-          <p class="section-subtitle">Passionate experts driving change across policy, research, and implementation.</p>
-        </div>
-      </div>
-      <div class="row g-4">
-        <div class="col-md-3 col-6">
-          <div class="team-card">
-            <div class="team-image"><i class="fas fa-user-circle"></i></div>
-            <div class="team-body">
-              <h5>Stephen Riley</h5>
-              <div class="team-role">Executive Director</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 col-6">
-          <div class="team-card">
-            <div class="team-image"><i class="fas fa-user-circle"></i></div>
-            <div class="team-body">
-              <h5>Dr. Sarah Chen</h5>
-              <div class="team-role">Head of Health Policy</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 col-6">
-          <div class="team-card">
-            <div class="team-image"><i class="fas fa-user-circle"></i></div>
-            <div class="team-body">
-              <h5>James Okafor</h5>
-              <div class="team-role">Director of Education</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 col-6">
-          <div class="team-card">
-            <div class="team-image"><i class="fas fa-user-circle"></i></div>
-            <div class="team-body">
-              <h5>Elena Vogt</h5>
-              <div class="team-role">Sustainability Lead</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="text-center mt-4">
-        <a href="#" class="btn-accent"><i class="fas fa-arrow-right me-2"></i> View Full Team</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== TESTIMONIALS ========== -->
-  <section class="section-padding" style="background: #fff;">
-    <div class="container">
-      <div class="row text-center mb-5">
-        <div class="col-lg-8 mx-auto">
-          <span class="badge-soft"><i class="fas fa-quote-left me-2"></i> Testimonials</span>
-          <h2 class="section-title">What People Say</h2>
-          <p class="section-subtitle">Hear from our partners and collaborators.</p>
-        </div>
-      </div>
-      <div class="row g-4">
-        <div class="col-md-4">
-          <div class="testimonial-card">
-            <i class="fas fa-quote-right"></i>
-            <p>Global Policy Network's evidence-based approach has transformed our primary care strategy. Their insights are invaluable.</p>
-            <div class="testimonial-author">— Dr. A. Patel, NHS</div>
-            <div class="testimonial-role">Primary Care Lead</div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="testimonial-card">
-            <i class="fas fa-quote-right"></i>
-            <p>Their roundtables brought together stakeholders who had never spoken before. The impact on our education policy was immediate.</p>
-            <div class="testimonial-author">— Maria Santos</div>
-            <div class="testimonial-role">Education Minister, Portugal</div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="testimonial-card">
-            <i class="fas fa-quote-right"></i>
-            <p>A truly collaborative partner. GPN's commitment to sustainability is matched by their ability to deliver practical solutions.</p>
-            <div class="testimonial-author">— David Kim</div>
-            <div class="testimonial-role">UN Sustainable Development</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== CTA ========== -->
-  <section class="cta-section">
-    <div class="container">
-      <div class="row align-items-center text-center text-lg-start">
-        <div class="col-lg-8">
-          <h2>Want to Get Involved?</h2>
-          <p>
-            Join our network of policy experts, researchers and changemakers. Together we're building a more equitable and sustainable future.
-          </p>
-        </div>
-        <div class="col-lg-4 text-center text-lg-end mt-4 mt-lg-0">
-          <a href="https://forms.office.com/r/WjHFgL2Rdp" class="btn-cta" target="_blank">
-            <i class="fas fa-handshake me-2"></i> Contact Us Now
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== FOOTER (unchanged) ========== -->
-  <footer class="footer-section">
-    <div class="container">
-      <div class="row g-4">
-        <div class="col-lg-4">
-          <img src="https://static.wixstatic.com/media/3109a0_92620ec4c9944adbaa85b32eefc65a5e~mv2.png/v1/crop/x_0,y_3,w_500,h_494/fill/w_89,h_106,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Untitled%20design%20(1).png" alt="Global Policy Network" class="footer-logo">
-          <p class="footer-about">
-            Where Policy Meets Implementation. An independent global policy institute dedicated to creating positive societal impact through evidence-based advocacy and innovation.
-          </p>
-          <div class="social-links">
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#"><i class="fab fa-x-twitter"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
-          </div>
-        </div>
-        <div class="col-6 col-md-3">
-          <h5>Quick Links</h5>
-          <ul class="footer-links">
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Our Work</a></li>
-            <li><a href="#">Fellowship</a></li>
-            <li><a href="#">Partnership</a></li>
-            <li><a href="#">Contact Us</a></li>
-          </ul>
-        </div>
-        <div class="col-6 col-md-2">
-          <h5>Legal</h5>
-          <ul class="footer-links">
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Use</a></li>
-            <li><a href="#">Accessibility</a></li>
-          </ul>
-        </div>
-        <div class="col-md-3">
-          <h5>Get in Touch</h5>
-          <ul class="footer-links">
-            <li>
-              <a href="mailto:info@globalpolicynetwork.com">
-                <i class="fas fa-envelope me-2"></i> info@globalpolicynetwork.com
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fas fa-map-marker-alt me-2"></i> 128 City Road, London EC1V 2NX
-              </a>
-            </li>
-            <li class="mt-2" style="font-size:0.82rem; color:rgba(255,255,255,0.5);">
-              Registered in England & Wales 16698102
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom text-center">
-        &copy; 2026 Global Policy Network. All rights reserved.
-      </div>
-    </div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // ----- Intersection Observer for fade-up animations -----
+  document.addEventListener('DOMContentLoaded', function() {
+    const fadeEls = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -40px 0px'
+    });
+    fadeEls.forEach(el => observer.observe(el));
+  });
+</script>
 </body>
 </html>
