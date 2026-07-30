@@ -2,19 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Podcast | Global Policy Network</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+  <title>Policy Unpacked | Global Policy Network</title>
   <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
-
-  <!-- Font Awesome 6 Icons -->
+  <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-
-  <!-- Google Fonts: Montserrat only -->
+  <!-- Google Fonts: Montserrat -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-
+  <!-- AOS (Animate on Scroll) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
+    /* ----- GLOBAL STYLES (matching homepage) ----- */
     :root {
       --primary-color: #0B2F58;
       --primary-light: #1A4A7A;
@@ -30,30 +29,25 @@
       --radius: 14px;
       --transition: all 0.3s ease;
     }
-
     * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-
     body {
       font-family: 'Montserrat', sans-serif;
       color: var(--text-dark);
-      overflow-x: hidden;
       background: var(--white);
+      overflow-x: hidden;
+      padding-top: 0px;
     }
-
-    h1, h2, h3, h4, h5, h6 {
+    h1,h2,h3,h4,h5,h6 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       letter-spacing: -0.02em;
     }
-
     .section-padding { padding: 90px 0; }
-
     .section-title {
       font-size: 2.4rem;
       font-weight: 700;
       margin-bottom: 0.75rem;
     }
-
     .section-subtitle {
       font-size: 1.1rem;
       color: var(--text-light);
@@ -62,7 +56,6 @@
       font-weight: 400;
       line-height: 1.7;
     }
-
     .badge-soft {
       display: inline-block;
       background: rgba(11, 47, 88, 0.08);
@@ -75,8 +68,6 @@
       text-transform: uppercase;
       margin-bottom: 1rem;
     }
-
-    /* Buttons */
     .btn-primary-custom {
       background: var(--primary-color);
       color: #fff;
@@ -95,7 +86,6 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 22px rgba(11, 47, 88, 0.22);
     }
-
     .btn-outline-custom {
       background: transparent;
       color: #fff;
@@ -113,7 +103,6 @@
       color: var(--primary-color);
       transform: translateY(-2px);
     }
-
     .btn-accent {
       background: var(--accent-color);
       color: #fff;
@@ -133,43 +122,99 @@
       box-shadow: 0 8px 22px rgba(109, 178, 214, 0.3);
     }
 
-    /* Navbar */
+    /* ===== NAVBAR — MODERN STICKY WITH SHRINK EFFECT (matches homepage) ===== */
     .navbar-custom {
-      background: rgba(11, 47, 88, 0.94);
-      backdrop-filter: blur(12px);
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: rgba(11, 47, 88, 0.98);
+      backdrop-filter: blur(14px) saturate(180%);
+      -webkit-backdrop-filter: blur(14px) saturate(180%);
+      padding: 0 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+      transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1050;
     }
-    .navbar-custom .navbar-brand img { height: 88px; width: auto; }
+    .navbar-custom.shrink {
+      padding: 4px 0;
+      background: rgba(11, 47, 88, 0.98);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+    .navbar-custom::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, transparent 100%);
+      pointer-events: none;
+    }
+    .navbar-brand {
+      transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+    }
+    .navbar-brand img {
+      height: 70px;
+      width: auto;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+      transition: height 0.35s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+    }
+    .navbar-custom.shrink .navbar-brand img {
+      height: 62px;
+    }
     .navbar-custom .nav-link {
-      color: rgba(255,255,255,0.88) !important;
+      color: rgba(255,255,255,0.92) !important;
       font-weight: 500;
       font-size: 0.94rem;
       padding: 8px 16px !important;
       border-radius: 8px;
       transition: var(--transition);
+      letter-spacing: 0.01em;
+      position: relative;
+    }
+    .navbar-custom .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 16px;
+      right: 16px;
+      height: 2px;
+      background: var(--accent-color);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+      border-radius: 4px;
+    }
+    .navbar-custom .nav-link:hover::after,
+    .navbar-custom .nav-link.active::after {
+      transform: scaleX(0.7);
     }
     .navbar-custom .nav-link:hover,
     .navbar-custom .nav-link.active {
       color: #fff !important;
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.08);
     }
     .navbar-custom .dropdown-menu {
-      background: rgba(11, 47, 88, 0.98);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 12px;
+      background: oklch(22% .06 265);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
       padding: 8px;
       margin-top: 8px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.25);
     }
     .navbar-custom .dropdown-item {
-      color: rgba(255,255,255,0.88);
+      color: rgba(255,255,255,0.9);
       padding: 10px 18px;
-      border-radius: 8px;
+      border-radius: 10px;
       font-weight: 400;
+      transition: var(--transition);
     }
     .navbar-custom .dropdown-item:hover {
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.12);
       color: #fff;
+      transform: translateX(4px);
     }
     .navbar-custom .btn-join {
       background: var(--accent-color);
@@ -180,53 +225,60 @@
       font-size: 0.9rem;
       text-decoration: none;
       transition: var(--transition);
+      box-shadow: 0 4px 12px rgba(109,178,214,0.25);
     }
     .navbar-custom .btn-join:hover {
       background: #5AA0C4;
-      transform: translateY(-2px);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 8px 24px rgba(109,178,214,0.35);
+    }
+    .navbar-custom.shrink .btn-join {
+      padding: 7px 22px;
+      font-size: 0.85rem;
     }
     .navbar-toggler { border: none; }
     .navbar-toggler:focus { box-shadow: none; }
     .navbar-toggler-icon {
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,0.85)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
     }
 
-    /* Page Hero */
-    .page-hero {
-      background: linear-gradient(135deg, var(--primary-color), #1A4A7A);
-      padding: 160px 0 90px;
-      color: #fff;
+    /* Hero - Single Image (no carousel) */
+    .hero-section {
       position: relative;
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
       overflow: hidden;
+      margin-top: 0;
     }
-    .page-hero::before {
-      content: '';
+    .hero-image {
       position: absolute;
-      right: -60px;
-      top: -60px;
-      width: 280px;
-      height: 280px;
-      background: rgba(109,178,214,0.12);
-      border-radius: 50%;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
-    .page-hero h1 {
-      font-size: 3.2rem;
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgb(32 33 34 / 88%) 0%, rgb(0 0 0 / 65%) 50%, rgba(11, 47, 88, 0.45) 100%);
+      z-index: 1;
+    }
+    .hero-section .container { position: relative; z-index: 2; }
+    .hero-section h1 {
+      font-size: 4rem;
       font-weight: 400;
-      margin-bottom: 16px;
+      color: #fff;
+      line-height: 1.12;
+      margin-bottom: 18px;
+      padding: 150px 0 20px 0;
     }
-    .page-hero h1 .highlight {
+    .hero-section h1 .highlight {
       background: linear-gradient(135deg, var(--accent-color), #8AD0F0);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-    }
-    .page-hero p {
-      font-size: 1.15rem;
-      color: rgba(255,255,255,0.88);
-      max-width: 580px;
-      line-height: 1.7;
-      font-weight: 300;
-      margin-bottom: 28px;
     }
     .hero-divider {
       width: 72px;
@@ -235,122 +287,119 @@
       border-radius: 2px;
       margin-bottom: 24px;
     }
-    .platform-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 8px;
+    .hero-section p {
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.88);
+      max-width: 560px;
+      line-height: 1.75;
+      font-weight: 300;
+      margin-bottom: 32px;
     }
-    .platform-btn {
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.25);
-      color: #fff;
+    .hero-platform-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(4px);
       padding: 10px 22px;
       border-radius: 50px;
-      font-size: 0.9rem;
+      color: #fff;
       font-weight: 500;
       text-decoration: none;
       transition: var(--transition);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+      border: 1px solid rgba(255,255,255,0.15);
+      font-size: 0.95rem;
     }
-    .platform-btn:hover {
-      background: #fff;
-      color: var(--primary-color);
+    .hero-platform-links a:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+      border-color: var(--accent-color);
     }
+    .hero-platform-links a i { font-size: 1.2rem; }
 
-    /* Series Cards */
-    .series-section { background: var(--light-bg-alt); }
-    .series-card {
+    /* Podcast Cards */
+    .podcast-grid .podcast-card {
       background: #fff;
       border-radius: var(--radius);
-      padding: 32px 28px;
-      height: 100%;
-      border: 1px solid rgba(11,47,88,0.05);
-      box-shadow: var(--shadow-sm);
-      transition: var(--transition);
-    }
-    .series-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-md);
-    }
-    .series-card .icon-box {
-      width: 52px;
-      height: 52px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.35rem;
-      margin-bottom: 18px;
-    }
-    .series-card .icon-box.blue { background: rgba(11,47,88,0.1); color: var(--primary-color); }
-    .series-card .icon-box.teal { background: rgba(89,142,169,0.12); color: var(--secondary-color); }
-    .series-card .icon-box.gold { background: rgba(184,134,11,0.1); color: #B8860B; }
-    .series-card .icon-box.accent { background: rgba(109,178,214,0.15); color: var(--accent-color); }
-    .series-card h4 { font-size: 1.2rem; margin-bottom: 10px; }
-    .series-card p { color: var(--text-light); font-size: 0.95rem; line-height: 1.65; margin: 0; }
-
-    /* About Podcast */
-    .about-podcast {
-      background: linear-gradient(135deg, var(--primary-color), #1A4A7A);
-      border-radius: var(--radius);
-      padding: 48px 40px;
-      color: #fff;
-      position: relative;
       overflow: hidden;
-    }
-    .about-podcast::before {
-      content: '';
-      position: absolute;
-      right: -40px;
-      top: -40px;
-      width: 220px;
-      height: 220px;
-      background: rgba(109,178,214,0.15);
-      border-radius: 50%;
-    }
-
-    /* Guests */
-    .guest-card {
-      background: #fff;
-      border-radius: var(--radius);
-      padding: 28px 22px;
-      text-align: center;
       height: 100%;
       border: 1px solid rgba(11,47,88,0.06);
       box-shadow: var(--shadow-sm);
       transition: var(--transition);
     }
-    .guest-card:hover {
-      transform: translateY(-4px);
+    .podcast-grid .podcast-card:hover {
+      transform: translateY(-6px);
       box-shadow: var(--shadow-md);
     }
-    .guest-avatar {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin: 0 auto 16px;
+    .podcast-card .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      background: #000;
     }
-    .guest-card h5 { font-size: 1.05rem; margin-bottom: 6px; }
-    .guest-card p { color: var(--text-light); font-size: 0.85rem; line-height: 1.5; margin: 0; }
+    .podcast-card .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .podcast-card .card-body { padding: 22px; }
+    .podcast-card .card-body .episode-tag {
+      display: inline-block;
+      background: rgba(11,47,88,0.07);
+      color: var(--primary-color);
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 10px;
+    }
+    .podcast-card .card-body h4 { font-size: 1.12rem; margin-bottom: 8px; }
+    .podcast-card .card-body p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    /* Guest Grid */
+    .guest-grid .guest-item {
+      text-align: center;
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 24px 16px;
+      border: 1px solid rgba(11,47,88,0.05);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      height: 100%;
+    }
+    .guest-grid .guest-item:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+    }
+    .guest-item .guest-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 16px;
+      display: block;
+      border: 3px solid var(--secondary-color);
+    }
+    .guest-item h5 { font-size: 1.05rem; margin-bottom: 4px; }
+    .guest-item p { font-size: 0.85rem; color: var(--text-light); margin: 0; }
 
     /* CTA */
     .cta-section {
       background: linear-gradient(135deg, var(--primary-color), #1A4A7A);
       padding: 80px 0;
-      position: relative;
-      overflow: hidden;
+      color: #fff;
     }
-    .cta-section h2 { color: #fff; font-size: 2.3rem; }
+    .cta-section h2 { font-size: 2.3rem; }
     .cta-section p {
       color: rgba(255,255,255,0.85);
       font-size: 1.1rem;
@@ -428,53 +477,61 @@
       margin-top: 40px;
       font-size: 0.85rem;
       color: rgba(255,255,255,0.5);
+      text-align: center;
     }
 
     /* Responsive */
     @media (max-width: 991px) {
-      .page-hero h1 { font-size: 2.5rem; }
+      body { padding-top: 100px; }
+      .hero-section h1 { font-size: 2.7rem; }
       .section-title { font-size: 2rem; }
       .navbar-custom .navbar-collapse {
-        background: rgba(11,47,88,0.98);
+        background: oklch(19% .05 265);
+        backdrop-filter: blur(14px);
         padding: 18px;
-        border-radius: 12px;
+        border-radius: 16px;
         margin-top: 10px;
+        border: 1px solid rgba(255,255,255,0.06);
       }
+      .navbar-custom.shrink .navbar-brand img { height: 58px; }
     }
     @media (max-width: 768px) {
-      .page-hero { padding: 140px 0 70px; text-align: center; }
-      .page-hero h1 { font-size: 2.1rem; }
-      .page-hero p { margin-left: auto; margin-right: auto; }
+      body { padding-top: 90px; }
+      .hero-section { min-height: 78vh; text-align: center; }
+      .hero-section h1 { font-size: 2.15rem; }
+      .hero-section p { font-size: 1rem; margin-left: auto; margin-right: auto; }
       .hero-divider { margin-left: auto; margin-right: auto; }
-      .platform-links { justify-content: center; }
       .section-padding { padding: 60px 0; }
       .section-title { font-size: 1.75rem; }
-      .cta-section h2 { font-size: 1.9rem; }
+      .hero-platform-links { justify-content: center; }
       .footer-section { text-align: center; }
       .footer-about { margin: 0 auto 20px; max-width: 100%; }
       .social-links { justify-content: center; }
+      .navbar-custom.shrink .navbar-brand img { height: 52px; }
     }
     @media (max-width: 576px) {
-      .page-hero h1 { font-size: 1.85rem; }
+      body { padding-top: 85px; }
+      .hero-section h1 { font-size: 1.85rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ========== NAVBAR ========== -->
-  <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+  <!-- ========== NAVBAR — MODERN STICKY WITH SCROLL SHRINK (exactly like homepage) ========== -->
+  <nav class="navbar navbar-expand-lg navbar-custom" id="mainNavbar">
     <div class="container">
-      <a class="navbar-brand" href="index.html">
+      <a class="navbar-brand" href="#">
         <img src="https://static.wixstatic.com/media/3109a0_92620ec4c9944adbaa85b32eefc65a5e~mv2.png/v1/crop/x_0,y_3,w_500,h_494/fill/w_89,h_106,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Untitled%20design%20(1).png" alt="Global Policy Network">
+        <!-- <img src="poadcastimg.jpg" alt="Global Policy Network"> -->
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto align-items-lg-center">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://syedsalmanumer.github.io/global-policy-network/">Home</a></li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">About Us</a>
+            <a class="nav-link dropdown-toggle" href="https://syedsalmanumer.github.io/global-policy-network/about.html" data-bs-toggle="dropdown">About Us</a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">Our Team</a></li>
               <li><a class="dropdown-item" href="#">Our Partners</a></li>
@@ -496,7 +553,7 @@
               <li><a class="dropdown-item" href="#">Blog</a></li>
               <li><a class="dropdown-item" href="#">Reports</a></li>
               <li><a class="dropdown-item" href="#">Research</a></li>
-              <li><a class="dropdown-item active" href="podcast.html">Podcast</a></li>
+              <li><a class="dropdown-item" href="#">Podcast</a></li>
             </ul>
           </li>
           <li class="nav-item"><a class="nav-link" href="#">Membership</a></li>
@@ -507,32 +564,31 @@
     </div>
   </nav>
 
-  <!-- ========== PAGE HERO ========== -->
-  <section class="page-hero">
+  <!-- ========== HERO — SINGLE IMAGE (no carousel) ========== -->
+  <section class="hero-section" id="home">
+    <img class="hero-image" src="poadcastimg.jpg" alt="Global Policy Network">
+    
+    <div class="hero-overlay"></div>
+
     <div class="container">
       <div class="row">
-        <div class="col-lg-8">
-          <span class="badge-soft" style="background:rgba(255,255,255,0.12); color:#fff; border:1px solid rgba(255,255,255,0.15);">
-            <i class="fas fa-microphone-alt me-2"></i> Podcast
-          </span>
+        <div class="col-lg-8 col-xl-7" data-aos="fade-up" data-aos-duration="900">
           <h1>Policy <span class="highlight">Unpacked</span></h1>
           <div class="hero-divider"></div>
           <p>
             Voices. Insights. Policy Redefined. Clear, jargon-free discussions for policymakers, professionals, and policy-curious minds.
           </p>
-          <p class="mb-3" style="font-size:0.95rem; opacity:0.85;">
+          <div class="hero-platform-links d-flex flex-wrap gap-3 mt-4">
+            <a href="https://open.spotify.com/show/27G4MszPLpmJ3AGV1mRBk6" target="_blank"><i class="fab fa-spotify"></i> Spotify</a>
+            <a href="#" target="_blank"><i class="fab fa-apple"></i> Apple Podcasts</a>
+            <a href="https://youtube.com/@globalpolicynetwork" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+          </div>
+          <p class="mt-3" style="font-size: 0.95rem; opacity: 0.8; max-width: 100%;">
             Full episodes available on Spotify, Apple Podcasts and YouTube
           </p>
-          <div class="platform-links">
-            <a href="https://open.spotify.com/show/27G4MszPLpmJ3AGV1mRBk6" target="_blank" class="platform-btn">
-              <i class="fab fa-spotify"></i> Spotify
-            </a>
-            <a href="https://www.globalpolicynetwork.com/podcast" target="_blank" class="platform-btn">
-              <i class="fab fa-apple"></i> Apple Podcasts
-            </a>
-            <a href="https://www.globalpolicynetwork.com/podcast" target="_blank" class="platform-btn">
-              <i class="fab fa-youtube"></i> YouTube
-            </a>
+          <div class="hero-buttons mt-4 mb-4 pb-4">
+            <a href="#podcast-grid" class="btn-primary-custom"><i class="fas fa-play me-2"></i> Explore Episodes</a>
+            <a href="#guests" class="btn-outline-custom"><i class="fas fa-users me-2"></i> Meet Our Guests</a>
           </div>
         </div>
       </div>
@@ -540,23 +596,25 @@
   </section>
 
   <!-- ========== ABOUT THE PODCAST ========== -->
-  <section class="section-padding">
+  <section class="section-padding" style="background: var(--light-bg-alt);">
     <div class="container">
-      <div class="about-podcast">
-        <div class="row align-items-center">
-          <div class="col-lg-8">
-            <h2 class="h2 fw-bold mb-3">About the Podcast</h2>
-            <p class="mb-4 opacity-90" style="line-height:1.75; font-weight:300;">
-              Welcome to <strong>Policy Unpacked</strong>, a podcast by Global Policy Network. We dive into the policies shaping our world — from healthcare to sustainability to education — and explore how these critical areas intersect to drive meaningful change.
-            </p>
-            <p class="mb-0 opacity-85" style="line-height:1.7; font-weight:300;">
-              Each episode offers clear, jargon-free discussions designed for policymakers, professionals, and policy-curious minds alike. Whether you’re shaping systems or simply curious about how policy works, you’re in the right place.
-            </p>
-          </div>
-          <div class="col-lg-4 text-center text-lg-end mt-4 mt-lg-0">
-            <a href="https://open.spotify.com/show/27G4MszPLpmJ3AGV1mRBk6" target="_blank" class="btn-accent">
-              <i class="fas fa-play me-2"></i> Explore All Episodes
-            </a>
+      <div class="row align-items-center">
+        <div class="col-lg-5 mb-4 mb-lg-0 text-center" data-aos="fade-right">
+          <img src="https://static.wixstatic.com/media/3109a0_a6ff4bb3628649599052dd26b4710a8e~mv2.png/v1/fill/w_295,h_293,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/3109a0_a6ff4bb3628649599052dd26b4710a8e~mv2.png" alt="Podcast Logo" style="max-width: 280px; border-radius: 20px; box-shadow: var(--shadow-md);">
+        </div>
+        <div class="col-lg-7" data-aos="fade-left">
+          <span class="badge-soft"><i class="fas fa-info-circle me-2"></i> About</span>
+          <h2 class="section-title" style="font-size: 2.2rem;">Welcome to Policy Unpacked</h2>
+          <p style="font-size: 1.05rem; color: var(--text-light); line-height: 1.8;">
+            A podcast by Global Policy Network. We dive into the policies shaping our world — from healthcare to sustainability to education — and explore how these critical areas intersect to drive meaningful change.
+          </p>
+          <p style="font-size: 1rem; color: var(--text-light); line-height: 1.7;">
+            Each episode offers clear, jargon-free discussions designed for policymakers, professionals, and policy-curious minds alike.
+          </p>
+          <div class="mt-4">
+            <a href="https://open.spotify.com/show/27G4MszPLpmJ3AGV1mRBk6" target="_blank" class="btn-accent me-2"><i class="fab fa-spotify me-2"></i> Spotify</a>
+            <a href="https://youtube.com/@globalpolicynetwork" target="_blank" class="btn-accent"><i class="fab fa-youtube me-2"></i> YouTube</a>
+            <a href="#" target="_blank" class="btn-accent"><i class="fab fa-apple me-2"></i> Apple Podcasts</a>
           </div>
         </div>
       </div>
@@ -564,105 +622,140 @@
   </section>
 
   <!-- ========== PODCAST SERIES ========== -->
-  <section class="series-section section-padding">
+  <section class="section-padding" style="background: var(--white);">
     <div class="container">
-      <div class="row text-center mb-5">
+      <div class="row text-center mb-5" data-aos="fade-up">
         <div class="col-lg-8 mx-auto">
-          <span class="badge-soft"><i class="fas fa-layer-group me-2"></i> Podcast Series</span>
-          <h2 class="section-title">Explore Our Series</h2>
-          <p class="section-subtitle">
-            Deep-dive conversations organised around the themes that matter most to health, education and sustainability policy.
-          </p>
+          <span class="badge-soft"><i class="fas fa-layer-group me-2"></i> Series</span>
+          <h2 class="section-title">Podcast Series</h2>
+          <p class="section-subtitle">Explore our curated series — from medicines policy to AI in healthcare.</p>
         </div>
       </div>
-
       <div class="row g-4">
-        <div class="col-md-6 col-lg-3">
-          <div class="series-card">
-            <div class="icon-box blue"><i class="fas fa-user-tie"></i></div>
-            <h4>Advisors & Associates</h4>
-            <p>
-              Conversations with GPN healthcare leaders on AI, technology, workforce wellbeing and digital transformation.
-            </p>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="podcast-card" style="padding: 24px; background: #f8f9fa; border-radius: var(--radius); height: 100%;">
+            <div style="background: rgba(11, 47, 88, 0.94); color: #fff; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px;">
+              <i class="fas fa-user-md me-2"></i> Advisors & Associates
+            </div>
+            <p style="font-size: 0.95rem; color: var(--text-light);">Conversations with GPN healthcare leaders on AI, technology, workforce wellbeing and digital transformation.</p>
           </div>
         </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="series-card">
-            <div class="icon-box teal"><i class="fas fa-pills"></i></div>
-            <h4>Medicines in the 10-Year Plan</h4>
-            <p>
-              Hosted by Stephen Riley — exploring access, optimisation, workforce and system integration in the NHS 10-Year Plan.
-            </p>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="podcast-card" style="padding: 24px; background: #f8f9fa; border-radius: var(--radius); height: 100%;">
+            <div style="background: rgba(11, 47, 88, 0.94); color: #fff; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px;">
+              <i class="fas fa-pills me-2"></i> Medicines in the 10-Year Plan
+            </div>
+            <p style="font-size: 0.95rem; color: var(--text-light);">Hosted by Stephen Riley — exploring access, optimisation, workforce and system integration in the NHS 10-Year Plan.</p>
           </div>
         </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="series-card">
-            <div class="icon-box gold"><i class="fas fa-file-alt"></i></div>
-            <h4>Policy Reports</h4>
-            <p>
-              Unpacking GPN’s latest reports on medicines, primary care and health system transformation.
-            </p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="series-card">
-            <div class="icon-box accent"><i class="fas fa-star"></i></div>
-            <h4>Bonus Episodes</h4>
-            <p>
-              Perspectives from GPN fellows and partners on healthcare innovation and the future of medicines and primary care.
-            </p>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="podcast-card" style="padding: 24px; background: #f8f9fa; border-radius: var(--radius); height: 100%;">
+            <div style="background: rgba(11, 47, 88, 0.94); color: #fff; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px;">
+              <i class="fas fa-file-alt me-2"></i> Policy Reports
+            </div>
+            <p style="font-size: 0.95rem; color: var(--text-light);">Unpacking GPN’s latest reports on medicines, primary care and health system transformation.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========== PREVIOUS GUESTS ========== -->
-  <section class="section-padding">
+  <!-- ========== EPISODE GRID ========== -->
+  <section class="section-padding" id="podcast-grid" style="background: var(--light-bg-alt);">
     <div class="container">
-      <div class="row text-center mb-5">
+      <div class="row text-center mb-5" data-aos="fade-up">
         <div class="col-lg-8 mx-auto">
-          <span class="badge-soft"><i class="fas fa-users me-2"></i> Guests</span>
+          <span class="badge-soft"><i class="fas fa-video me-2"></i> Episodes</span>
+          <h2 class="section-title">Latest Episodes</h2>
+          <p class="section-subtitle">Full episodes available on YouTube, Spotify and Apple Podcasts.</p>
+        </div>
+      </div>
+      <div class="row g-4 podcast-grid">
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="podcast-card">
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+            </div>
+            <div class="card-body">
+              <span class="episode-tag">Advisors & Associates</span>
+              <h4>AI & Healthcare Workforce</h4>
+              <p>Exploring the role of AI in workforce wellbeing and digital transformation.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="podcast-card">
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+            </div>
+            <div class="card-body">
+              <span class="episode-tag">Medicines in the 10-Year Plan</span>
+              <h4>Medicines Optimisation</h4>
+              <p>Stephen Riley discusses access, workforce and system integration.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="podcast-card">
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube.com/embed/9bZkp7q19f0" allowfullscreen></iframe>
+            </div>
+            <div class="card-body">
+              <span class="episode-tag">Policy Reports</span>
+              <h4>Primary Care Transformation</h4>
+              <p>Insights from GPN’s latest report on neighbourhood care models.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-5" data-aos="fade-up">
+        <a href="https://youtube.com/@globalpolicynetwork" target="_blank" class="btn-accent"><i class="fab fa-youtube me-2"></i> View All on YouTube</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== GUESTS ========== -->
+  <section class="section-padding" id="guests" style="background: var(--white);">
+    <div class="container">
+      <div class="row text-center mb-5" data-aos="fade-up">
+        <div class="col-lg-8 mx-auto">
+          <span class="badge-soft"><i class="fas fa-user-tie me-2"></i> Guests</span>
           <h2 class="section-title">Previous Guests Include</h2>
-          <p class="section-subtitle">
-            Leading voices from pharmacy, policy, industry and global health who have joined us on Policy Unpacked.
-          </p>
+          <p class="section-subtitle">Leading voices in policy, health, and innovation.</p>
         </div>
       </div>
-
-      <div class="row g-4">
-        <div class="col-6 col-md-4 col-lg-3">
-          <div class="guest-card">
-            <div class="guest-avatar">SR</div>
+      <div class="row g-4 guest-grid">
+        <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="guest-item">
+            <img class="guest-avatar" src="https://static.wixstatic.com/media/3109a0_e76ce327e17448ca858a954a78cd4789~mv2.jpeg/v1/crop/x_248,y_0,w_924,h_925/fill/w_225,h_225,al_c,q_80,usm_0.66_1.00_0.01,enc_avif/stephen.jpeg" alt="Stephen Riley">
             <h5>Stephen Riley</h5>
-            <p>Deputy Regional Chief Pharmacist – Pharmacy Integration, NHS England Northwest</p>
+            <p>Deputy Chief Pharmacist, NHS England</p>
           </div>
         </div>
-        <div class="col-6 col-md-4 col-lg-3">
-          <div class="guest-card">
-            <div class="guest-avatar">AO</div>
+        <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="guest-item">
+            <img class="guest-avatar" src="https://static.wixstatic.com/media/3109a0_043b81b50dad4efc8b0caa24d9e07c66~mv2.jpg/v1/fill/w_225,h_225,al_c,q_80,usm_0.66_1.00_0.01,enc_avif/right_arrows_1.jpg" alt="Azuka Okeke">
             <h5>Azuka Okeke</h5>
-            <p>CEO of the Africa Resource Centre for Supply Chain Management</p>
+            <p>CEO, Africa Resource Centre</p>
           </div>
         </div>
-        <div class="col-6 col-md-4 col-lg-3">
-          <div class="guest-card">
-            <div class="guest-avatar">CL</div>
+        <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="guest-item">
+            <img class="guest-avatar" src="https://static.wixstatic.com/media/3109a0_73bac3c7fa9f4b6689f8ec62530c3343~mv2.jpg/v1/fill/w_225,h_225,al_c,q_80,usm_0.66_1.00_0.01,enc_avif/Chris-Lo-HKTDC-regional-director-171007.jpg" alt="Chris Lo">
             <h5>Chris Lo</h5>
-            <p>Regional Director for Europe and Central Asia, Hong Kong Trade Development Council</p>
+            <p>Regional Director, HK Trade Development</p>
           </div>
         </div>
-        <div class="col-6 col-md-4 col-lg-3">
-          <div class="guest-card">
-            <div class="guest-avatar">YA</div>
+        <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="400">
+          <div class="guest-item">
+            <img class="guest-avatar" src="https://static.wixstatic.com/media/3109a0_0b58870402194160a7ddb1c194e14f27~mv2.jpg/v1/crop/x_20,y_0,w_3580,h_3580/fill/w_225,h_225,al_c,q_80,usm_0.66_1.00_0.01,enc_avif/Picsart_25-03-25_22-13-00-311%5B1%5D.jpg" alt="Yousaf Ahmad">
             <h5>Yousaf Ahmad</h5>
-            <p>ICS Chief Pharmacist and Director of Medicines Optimisation, NHS Frimley</p>
+            <p>ICS Chief Pharmacist, NHS Frimley</p>
           </div>
         </div>
       </div>
-
-      <div class="text-center mt-4">
-        <p class="text-muted mb-0">…Plus many more!</p>
+      <div class="text-center mt-4" data-aos="fade-up">
+        <p style="font-weight: 600; color: var(--primary-color);"><i class="fas fa-plus-circle me-1"></i> …Plus Many More!</p>
       </div>
     </div>
   </section>
@@ -671,16 +764,12 @@
   <section class="cta-section">
     <div class="container">
       <div class="row align-items-center text-center text-lg-start">
-        <div class="col-lg-8">
+        <div class="col-lg-8" data-aos="fade-right">
           <h2>Want to Get Involved?</h2>
-          <p>
-            Join our network of policy experts, researchers and changemakers. Together we’re building a more equitable and sustainable future.
-          </p>
+          <p>Join our network of policy experts, researchers and changemakers. Together we’re building a more equitable and sustainable future.</p>
         </div>
-        <div class="col-lg-4 text-center text-lg-end mt-4 mt-lg-0">
-          <a href="https://forms.office.com/r/WjHFgL2Rdp" class="btn-cta" target="_blank">
-            <i class="fas fa-handshake me-2"></i> Contact Us Now
-          </a>
+        <div class="col-lg-4 text-center text-lg-end mt-4 mt-lg-0" data-aos="fade-left">
+          <a href="https://forms.office.com/r/WjHFgL2Rdp" target="_blank" class="btn-cta"><i class="fas fa-handshake me-2"></i> Contact Us Now</a>
         </div>
       </div>
     </div>
@@ -692,9 +781,7 @@
       <div class="row g-4">
         <div class="col-lg-4">
           <img src="https://static.wixstatic.com/media/3109a0_92620ec4c9944adbaa85b32eefc65a5e~mv2.png/v1/crop/x_0,y_3,w_500,h_494/fill/w_89,h_106,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Untitled%20design%20(1).png" alt="Global Policy Network" class="footer-logo">
-          <p class="footer-about">
-            Where Policy Meets Implementation. An independent global policy institute dedicated to creating positive societal impact through evidence-based advocacy and innovation.
-          </p>
+          <p class="footer-about">Where Policy Meets Implementation. An independent global policy institute dedicated to creating positive societal impact through evidence-based advocacy and innovation.</p>
           <div class="social-links">
             <a href="#"><i class="fab fa-linkedin-in"></i></a>
             <a href="#"><i class="fab fa-x-twitter"></i></a>
@@ -723,28 +810,33 @@
         <div class="col-md-3">
           <h5>Get in Touch</h5>
           <ul class="footer-links">
-            <li>
-              <a href="mailto:info@globalpolicynetwork.com">
-                <i class="fas fa-envelope me-2"></i> info@globalpolicynetwork.com
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fas fa-map-marker-alt me-2"></i> 128 City Road, London EC1V 2NX
-              </a>
-            </li>
-            <li class="mt-2" style="font-size:0.82rem; color:rgba(255,255,255,0.5);">
-              Registered in England & Wales 16698102
-            </li>
+            <li><a href="mailto:info@globalpolicynetwork.com"><i class="fas fa-envelope me-2"></i> info@globalpolicynetwork.com</a></li>
+            <li><a href="#"><i class="fas fa-map-marker-alt me-2"></i> 128 City Road, London EC1V 2NX</a></li>
+            <li style="font-size:0.82rem; color:rgba(255,255,255,0.5);">Registered in England &amp; Wales 16698102</li>
           </ul>
         </div>
       </div>
-      <div class="footer-bottom text-center">
-        &copy; 2026 Global Policy Network. All rights reserved.
-      </div>
+      <div class="footer-bottom">&copy; 2026 Global Policy Network. All rights reserved.</div>
     </div>
   </footer>
 
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ once: true, offset: 30, duration: 700 });
+
+    // Modern sticky navbar shrink effect (exactly like homepage)
+    const navbar = document.getElementById('mainNavbar');
+    function handleScroll() {
+      if (window.scrollY > 15) {
+        navbar.classList.add('shrink');
+      } else {
+        navbar.classList.remove('shrink');
+      }
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+  </script>
 </body>
 </html>
