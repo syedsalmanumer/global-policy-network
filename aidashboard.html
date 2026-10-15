@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GPN Intelligence Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg1:#dde3ea;--bg2:#c8d1da;--sf:#e6ebf0;--sf2:#eef2f5;--tx:#1c2733;--mu:#51606f;--nv:#1c2a44;--sl:rgba(255,255,255,.85);--sd:rgba(148,163,180,.55);--tl:#1f7a75;--h:#b8382b;--m:#9a6508;--l:#2a7f52;
+--rs:6px 6px 12px var(--sd),-6px -6px 12px var(--sl);--rs-s:4px 4px 8px var(--sd),-4px -4px 8px var(--sl);--is:inset 4px 4px 9px var(--sd),inset -4px -4px 9px var(--sl);--is-s:inset 3px 3px 6px var(--sd),inset -3px -3px 6px var(--sl);--is-xs:inset 2px 2px 4px var(--sd),inset -2px -2px 4px var(--sl);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#1a1f27;--bg2:#12151b;--sf:#1e242c;--sf2:#222933;--tx:#eef1f4;--mu:#a7b1bc;--nv:#3b4a6b;--sl:rgba(255,255,255,.04);--sd:rgba(0,0,0,.6);--tl:#4cc2bb;--h:#ff8a7a;--m:#e3a93b;--l:#5cc690}}
+:root[data-theme="dark"]{--bg1:#1a1f27;--bg2:#12151b;--sf:#1e242c;--sf2:#222933;--tx:#eef1f4;--mu:#a7b1bc;--nv:#3b4a6b;--sl:rgba(255,255,255,.04);--sd:rgba(0,0,0,.6);--tl:#4cc2bb;--h:#ff8a7a;--m:#e3a93b;--l:#5cc690}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{height:100%;margin:0;overflow:hidden;font:14px/1.55 'Manrope',system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:linear-gradient(160deg,var(--bg1),var(--bg2)) fixed;color:var(--tx)}
+*{box-sizing:border-box}button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--tl);outline-offset:2px}
+h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.02em}
+h1{font-size:26px;margin-bottom:4px}h2{font-size:16px;margin:30px 4px 12px}h3{font-size:16px;line-height:1.35}
+svg{flex:none;width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+#app{display:flex;gap:14px;height:calc(100% - 28px);margin:14px;padding:14px;background:var(--sf);border-radius:32px;box-shadow:14px 14px 30px var(--sd),-14px -14px 30px var(--sl)}
+#nav{flex:none;width:236px;display:flex;flex-direction:column;gap:6px;padding:16px 12px;border-radius:22px;box-shadow:var(--is);overflow:hidden auto;transition:width .35s cubic-bezier(.2,.8,.2,1)}
+.col #nav{width:76px;padding:16px 0;align-items:center}
+.br{display:flex;align-items:center;min-height:46px;padding:0 3px}.col .br{padding:0}
+.lgo{flex:none;width:42px;height:42px;border-radius:14px;display:grid;place-items:center;font-weight:800;font-size:17px;color:var(--tl);box-shadow:var(--rs-s)}
+.bt-t{margin-left:12px;max-width:170px;overflow:hidden;white-space:nowrap;transition:max-width .35s,opacity .2s}.bt-t b{display:block;font-weight:800;font-size:15px;letter-spacing:-.01em}.bt-t small{color:var(--mu);font-size:11.5px}
+.lb{margin-left:12px;max-width:170px;overflow:hidden;white-space:nowrap;transition:max-width .35s,opacity .2s}
+.col .bt-t,.col .lb{max-width:0;margin-left:0;opacity:0}
+.tgl{align-self:flex-end;width:34px;height:34px;margin:2px 4px 8px;border:0;border-radius:12px;display:grid;place-items:center;background:var(--sf);color:var(--mu);cursor:pointer;box-shadow:var(--rs-s)}
+.col .tgl{align-self:center;margin:2px 0 8px}.tgl svg{transition:transform .35s}.col .tgl svg{transform:rotate(180deg)}
+.tgl:active{box-shadow:var(--is-xs)}
+.nv{display:flex;align-items:center;width:100%;height:44px;padding:0 12px;border:0;border-radius:14px;background:none;color:var(--mu);font-weight:700;font-size:13.5px;cursor:pointer;text-align:left;transition:box-shadow .15s,color .15s}
+.nv:hover{color:var(--tx);box-shadow:var(--rs-s)}
+.nv.on{background:var(--nv);color:#fff;box-shadow:inset 3px 3px 6px rgba(0,0,0,.35),inset -2px -2px 5px rgba(255,255,255,.08)}
+.col .nv{width:44px;padding:0;justify-content:center}
+.sf{margin-top:auto;display:grid;gap:8px;width:100%}.col .sf{width:auto}
+.ws{display:grid;gap:5px;padding:0 4px 4px;max-height:90px;overflow:hidden;transition:max-height .35s,opacity .2s}.ws label{font-size:11.5px;font-weight:700;color:var(--mu);margin-left:3px}
+.col .ws{max-height:0;opacity:0;visibility:hidden;padding:0}
+main{flex:1;min-width:0;overflow:auto;padding:26px 28px 50px;border-radius:22px;box-shadow:var(--is);scrollbar-width:thin;scrollbar-color:var(--sd) transparent}.in{max-width:900px;margin:auto}
+.mu{color:var(--mu);margin:0 0 14px}
+.hero{background:var(--sf2);border-radius:24px;padding:32px;margin-bottom:18px;box-shadow:var(--rs)}
+.hero small{font-weight:700;font-size:12.5px;color:var(--tl)}.hero h1{font-size:34px;margin:8px 0;line-height:1.15}.hero em{color:var(--tl);font-style:normal}.hero p{max-width:560px;color:var(--mu)}
+.bt{background:var(--nv);color:#fff;border:0;border-radius:14px;padding:11px 18px;font-weight:700;font-size:13px;cursor:pointer;margin:6px 8px 0 0;box-shadow:var(--rs-s)}.bt.g{background:var(--sf);color:var(--tx)}.bt:active{box-shadow:var(--is-xs)}
+.kp,.gr{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+.kp>div,.gr>div,.gr>button{background:var(--sf2);border:0;border-radius:18px;padding:16px;box-shadow:var(--rs);color:var(--tx);text-align:left}
+.kp b{display:block;font-size:28px;font-weight:800;color:var(--tl)}.kp span{color:var(--mu);font-size:12px;font-weight:600}
+.gr b{display:block;margin-bottom:3px}.gr span{color:var(--mu);font-size:13px}.gr .n{display:block;margin-bottom:4px;font-weight:700;font-size:12px;color:var(--tl)}
+.ch{cursor:pointer;transition:transform .15s}.ch:hover{transform:translateY(-2px)}.ch:active{box-shadow:var(--is)}
+.cd{position:relative;background:var(--sf2);border-radius:18px;padding:16px 18px 16px 28px;margin-bottom:14px;box-shadow:var(--rs)}
+.cd::before{content:"";position:absolute;left:12px;top:16px;bottom:16px;width:4px;border-radius:4px;background:var(--l)}.cd.u0::before{background:var(--h)}.cd.u1::before{background:var(--m)}
+.top{display:flex;gap:14px;align-items:flex-start}.cd p{margin:8px 0}
+.ring{flex:none;width:52px;height:52px;border-radius:50%;background:conic-gradient(var(--tl) var(--p),transparent 0);display:grid;place-items:center;box-shadow:var(--is-s)}
+.ring b{width:38px;height:38px;border-radius:50%;background:var(--sf2);display:grid;place-items:center;font-weight:800;font-size:12px;box-shadow:3px 3px 6px var(--sd),-3px -3px 6px var(--sl)}
+.meta{display:flex;flex-wrap:wrap;gap:6px 10px;font-size:12px;color:var(--mu);margin-bottom:4px;align-items:center}
+.tg{background:var(--sf);color:var(--tl);padding:2px 10px;border-radius:99px;font-weight:700;box-shadow:var(--is-xs)}
+.ug{font-weight:800}.ug0{color:var(--h)}.ug1{color:var(--m)}.ug2{color:var(--l)}
+.kw{display:flex;flex-wrap:wrap;gap:7px}.kw span{font-size:11.5px;font-weight:600;border-radius:99px;padding:2px 10px;color:var(--mu);box-shadow:var(--is-xs)}
+.ac{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.sm,.chip{border:0;background:var(--sf);color:var(--tx);font-weight:700;font-size:12.5px;border-radius:13px;cursor:pointer;box-shadow:var(--rs-s);transition:transform .15s}
+.sm{padding:8px 14px}.chip{padding:8px 14px}.sm:hover,.chip:hover{transform:translateY(-1px)}.sm:active{box-shadow:var(--is-xs)}
+.sm.p,.chip.on{background:var(--nv);color:#fff}.chip.on{box-shadow:inset 3px 3px 6px rgba(0,0,0,.35)}
+.fb{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 18px;align-items:center}.fb input{flex:1;min-width:170px}
+input:not([type=range]),select{background:var(--sf);color:var(--tx);border:0;border-radius:13px;padding:10px 14px;font-weight:600;font-size:13px;box-shadow:var(--is-s)}
+select{appearance:none;padding-right:34px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%237d8c9a' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center}
+select option{color:#1c2733;background:#fff}
+input[type=range]{appearance:none;-webkit-appearance:none;height:10px;padding:0;border-radius:10px;background:var(--sf);box-shadow:var(--is-s);width:100%}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--nv);cursor:pointer;box-shadow:3px 3px 6px var(--sd),-2px -2px 5px var(--sl)}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border:0;border-radius:50%;background:var(--nv);cursor:pointer}
+.em{text-align:center;color:var(--mu);padding:40px 0}
+.chat{background:var(--sf2);border-radius:22px;display:flex;flex-direction:column;height:min(580px,68vh);box-shadow:var(--rs)}
+#cl{flex:1;overflow:auto;padding:18px;display:flex;flex-direction:column;gap:12px}
+.mg{max-width:86%;padding:11px 15px;border-radius:16px;background:var(--sf);box-shadow:var(--is-s)}.mg.u{align-self:flex-end;background:var(--nv);color:#fff;box-shadow:var(--rs-s)}
+.mg ol{margin:6px 0;padding-left:18px}.mg a{color:var(--tl);cursor:pointer;font-weight:700}.mg.u a{color:#fff}
+.sg{display:flex;flex-wrap:wrap;gap:10px;padding:0 16px 12px}
+.ci{display:flex;gap:10px;padding:0 16px 16px}.ci input{flex:1}.ci .bt{margin:0}
+.st label{display:grid;gap:6px;margin-bottom:16px;max-width:420px;font-weight:700}.st label span{font-weight:500;color:var(--mu)}
+.rw{display:flex;gap:12px;justify-content:space-between;padding:12px 4px;border-bottom:1px solid rgba(148,163,180,.25)}
+.sl a{display:inline-block;margin:0 10px 10px 0;padding:8px 14px;border-radius:13px;background:var(--sf);color:var(--tl);font-weight:700;text-decoration:none;box-shadow:var(--rs-s)}
+#dr{position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(18,24,34,.5);-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);opacity:0;visibility:hidden;transition:opacity .3s,visibility 0s linear .5s}
+#dr.show{opacity:1;visibility:visible;transition:opacity .3s}
+#dp{width:min(660px,100%);max-height:100%;overflow:auto;background:var(--sf);color:var(--tx);border-radius:28px;padding:26px;box-shadow:0 30px 80px rgba(0,0,0,.4),10px 10px 24px var(--sd),-8px -8px 20px var(--sl);transform:translate(var(--dx,0),var(--dy,0)) scale(.05);opacity:0;transition:transform .5s cubic-bezier(.2,.9,.25,1.08),opacity .25s}
+#dr.show #dp{transform:none;opacity:1}
+.dh{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.dh .meta{margin-top:6px}.rx{flex:none;width:38px;height:38px;padding:0;border-radius:50%;display:grid;place-items:center}
+#dp h3{font-size:21px;margin:14px 0 6px}#dp h4{margin:20px 0 8px 2px;font-size:12.5px;font-weight:800;color:var(--mu)}#dp p{margin:0}
+.bx{background:var(--sf);border-radius:14px;padding:12px 15px;box-shadow:var(--is-s)}
+#to{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:var(--nv);color:#fff;padding:11px 20px;border-radius:14px;font-weight:700;font-size:13px;opacity:0;transition:.35s;pointer-events:none;z-index:30;box-shadow:0 10px 30px rgba(0,0,0,.35)}#to.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:760px){#app{flex-direction:column;margin:8px;height:calc(100% - 16px);padding:10px;gap:10px;border-radius:26px}#nav{width:100%!important;flex-direction:row;padding:8px;align-items:center;overflow-x:auto}.br,.tgl,.sf{display:none}.nv{width:44px;flex:none;padding:0;justify-content:center}.lb{display:none}main{padding:18px 14px 40px}.hero{padding:22px}.hero h1{font-size:26px}}
+@media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}#dp{transform:none!important}}
+</style></head><body>
+<div id="app"><aside id="nav"></aside><main><div class="in" id="main"></div></main></div>
+<div id="dr" data-a="x"><div id="dp" role="dialog" aria-modal="true" aria-label="Intelligence brief"></div></div><div id="to"></div>
+<script>
+const TY=["Regulatory Update","MHRA / NICE Alert","NHS Policy Change","Competitor Move","Scientific Publication","Formulary Change","Industry Event"],
+CH=["UK/NHS Policy & Regulation","Digital Health & Innovation","Media & Breaking News","Pharma / Medical Affairs","Global Health","Conferences","Academic Intelligence"],
+GEO=["England","UK-wide","EU","USA","Global"],U=["High","Medium","Low"],
+KW="NHS|ICS|ICB|PCN|Neighbourhood Health|Neighbourhood Health Framework|INT|NHC|SNP|MNP|IHO|HWB|VCSE|10 Year Health Plan|DES|QOF|Social Prescribing|Pharmacy First|Community Pharmacy|Clinical Pharmacist|Pharmacy Technician|ARRS|Independent Prescriber|NMP|GPhC|Medicines Optimisation|SMR|Polypharmacy|Formulary|NICE|BNF|MHRA|PGD|CPPE".split("|"),
+IMP=["Regulatory change may alter compliance, reporting or submission requirements.","Safety or appraisal outcomes can shift prescriber confidence and access decisions.","Commissioning shifts change who decides, and where, on medicines access.","Competitor positioning may affect share, tender and pathway decisions.","New evidence can strengthen or weaken your value story.","Formulary status directly drives local uptake.","Useful for relationship-building and market intelligence."],
+ACT=["Update the compliance checklist and brief regulatory leads.","Review product exposure and prepare responses for key accounts.","Refresh ICB account plans and the stakeholder map.","Run a competitive impact assessment this week.","Share with Medical Affairs and add to the evidence log.","Notify field teams and review local access plans.","Decide attendance and book stakeholder meetings."],
+PE=[["Market Access Analyst",k=>`Test how “${k}” affects formulary access and pricing assumptions.`],["Clinician",k=>`Check whether “${k}” changes prescribing or referral pathways locally.`],["Pharmacist",k=>`Consider the impact of “${k}” on medicines review, supply and counselling.`],["Policy Lead",k=>`Map “${k}” against upcoming policy milestones and consultation deadlines.`],["Medical Affairs",k=>`Prepare evidence-based talking points on “${k}” for HCP engagement.`],["Conference Delegate",k=>`Identify sessions and contacts linked to “${k}”.`]],
+CL=["Pharma client (UK market access)","Digital conference provider (digital health only)"],
+SRC=[["UK/NHS Policy & Regulation","NHS England|england.nhs.uk/news,NICE|nice.org.uk,MHRA|gov.uk/government/organisations/medicines-and-healthcare-products-regulatory-agency,CQC|cqc.org.uk,GMC|gmc-uk.org,HRA|hra.nhs.uk,UKHSA|gov.uk/government/organisations/uk-health-security-agency,Health Foundation|health.org.uk/news-and-comment,Hospital Times|hospitaltimes.co.uk"],["Digital Health & Innovation","DigitalHealth.net|digitalhealth.net,Digital Health Rewired|digitalhealthrewired.com,HETT Show|hettshow.co.uk"],["Media & Breaking News","BBC Health|bbc.co.uk/news/health,ITV Health|itv.com/news/topic/health,The Times Healthcare|thetimes.com/uk/healthcare"],["Pharma / Medical Affairs","Fierce Pharma|fiercepharma.com,Pharmaceutical Commerce|pharmaceuticalcommerce.com,MAPS|medicalaffairs.org,EMA|ema.europa.eu,FDA|fda.gov"],["Global Health","WHO|who.int,Health Policy Watch|healthpolicy-watch.news,Global Health NOW|globalhealthnow.org,KFF|kff.org,CSIS|csis.org/topics/global-health"],["Conferences","NHS ConfedExpo|nhsconfed.org/events,Clinical Pharmacy Congress|pharmacycongress.co.uk,Best Practice Show|bestpracticeshow.co.uk"],["Academic Intelligence","The Lancet|thelancet.com,BMJ|bmj.com,Health Affairs|healthaffairs.org/forefront,Wellcome Trust|wellcome.org"]],
+RAW=[
+["ICB medicines optimisation plans tighten high-cost drug governance","Several ICB board papers now stress stricter Formulary compliance, pathway-level budget oversight and quarterly review of provider variation.",2,0,0,8.5,0,3,"ICB board papers",0],
+["MHRA drug safety update: prescriber counselling for GLP-1 therapies","New MHRA advice asks each Independent Prescriber to reinforce counselling and report suspected reactions through the Yellow Card scheme.",1,0,1,9.1,0,1,"MHRA",0],
+["NICE draft appraisal recommends new biologic for severe asthma","The NICE committee sets cost-effectiveness conditions in draft guidance; consultation closes in four weeks.",1,0,0,8.2,0,5,"NICE",0],
+["Neighbourhood Health Framework: first ICB delivery milestones published","Every ICB must show progress on INT rollout, with INT and PCN footprints expected to align by March 2029.",2,0,0,7.8,1,9,"NHS England",0],
+["Pharmacy First expansion consultation opens","Government seeks views on new clinical pathways delivered through PGD in Community Pharmacy.",2,0,0,7.4,1,6,"Gov.uk",0],
+["Competitor confirms UK launch and NHS access pathway","A rival manufacturer outlined its NICE submission timetable and early Formulary engagement with ICB leads.",3,3,1,8,0,4,"Fierce Pharma",0],
+["ARRS pharmacist funding rules updated for PCN employers","Revised DES guidance changes how a Clinical Pharmacist post is reimbursed under ARRS from next quarter.",2,0,0,6.9,1,12,"NHS England",0],
+["Study links structured medication reviews to fewer admissions","A peer-reviewed analysis finds SMR programmes for older patients cut avoidable admissions linked to Polypharmacy.",4,6,1,6.2,2,15,"BMJ",0],
+["Regional Formulary traffic-light change for SGLT2 inhibitors","An ICS moves a drug class from red to green, enabling primary care initiation under shared-care guidance.",5,0,0,7.1,1,8,"ICS formulary group",0],
+["Digital pharmacy records interoperability guidance issued","NHS guidance sets standards for sharing Community Pharmacy records with GP systems across each ICS.",0,1,0,6.8,1,7,"DigitalHealth.net",1],
+["HETT Show adds sessions on AI in medicines safety","Speakers from the NHS and MHRA will discuss AI-enabled monitoring and Medicines Optimisation.",6,5,1,5.4,2,11,"HETT Show",1],
+["Digital Health Rewired opens speaker call","Organisers invite NHS digital leaders to submit sessions on virtual wards and Neighbourhood Health.",6,5,1,4.8,2,14,"Digital Health Rewired",1],
+["WHO issues global antimicrobial stewardship guidance","Guidance urges national prescribing policies; limited direct effect on NHS Medicines Optimisation plans.",0,4,4,5.1,2,20,"WHO",0],
+["FDA approves rival therapy; UK read-across unclear","US approval may influence NICE scoping and MHRA licensing timelines for a similar product.",3,3,3,5.9,1,10,"FDA",0],
+["Local council reviews hospital car park charges","Unrelated to medicines or commissioning policy.",2,2,0,5,2,2,"BBC Health",0],
+["Hospital Trust announces VCSE small grants round","Minor community funding news.",2,2,0,3.2,2,6,"ITV News",0],
+["NICE hypertension guideline update published","Updated NICE advice changes first-line choices and BNF references for primary care.",1,0,0,6.5,1,45,"NICE",0],
+["Pharmacy First one-year review published","Review highlights uptake by Community Pharmacy and PGD pathway volumes.",2,0,0,6,2,62,"Gov.uk",0],
+["10 Year Health Plan implementation update","Progress report on Neighbourhood Health and the shift from hospital to community care.",2,0,0,7,1,38,"Gov.uk",0],
+["Digital Health 2026 conference programme announced","Programme features NHS digital transformation tracks.",6,5,1,5.5,2,33,"ConferenceSeries",1]
+].map((a,i)=>({id:i,t:a[0],s:a[1],ty:a[2],ch:a[3],geo:a[4],r:a[5],u:a[6],d:a[7],src:a[8],g:a[9],k:KW.filter(k=>new RegExp("\\b"+k+"\\b").test(a[0]+" "+a[1]))}));
+const $=s=>document.querySelector(s),esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let S={pg:"home",cl:0,pe:0,min:4,geo:0,u:-1,ty:-1,ch:-1,q:"",sv:0,saved:[],chat:[],th:""};
+try{S.saved=JSON.parse(localStorage.getItem("gpn_sv")||"[]");S.th=localStorage.getItem("gpn_th")||""}catch(e){}
+if(S.th)document.documentElement.dataset.theme=S.th;
+const pool=()=>RAW.filter(x=>x.k.length&&(S.cl==0||x.g)),
+live=()=>pool().filter(x=>(x.d<=30||x.ty==1)&&x.r>=S.min&&(S.geo||x.geo<2)).sort((a,b)=>a.u-b.u||b.r-a.r),
+arch=()=>pool().filter(x=>x.d>30&&x.ty!=1).sort((a,b)=>a.d-b.d),
+dt=d=>new Date(Date.now()-d*864e5).toLocaleDateString("en-GB",{day:"numeric",month:"short"}),
+hit=(x,q)=>!q||(x.t+x.s+x.src+x.k.join(" ")).toLowerCase().includes(q.toLowerCase()),
+lens=x=>PE[S.pe][1](x.k[0]||"this signal"),
+brief=x=>`${x.t}\n${TY[x.ty]} | ${U[x.u]} urgency | Relevance ${x.r}/10 | ${x.src}, ${dt(x.d)}\n\n${x.s}\n\nStrategic impact: ${IMP[x.ty]}\nRecommended action: ${ACT[x.ty]}\nFor ${PE[S.pe][0]}: ${lens(x)}`,
+card=x=>`<article class="cd u${x.u}"><div class="top"><i class="ring" style="--p:${x.r*10}%"><b>${x.r.toFixed(1)}</b></i><div><div class="meta"><span class="tg">${TY[x.ty]}</span><span class="ug ug${x.u}">${U[x.u]}</span><span>${x.src} · ${dt(x.d)} · ${GEO[x.geo]}</span></div><h3>${x.t}</h3></div></div><p>${x.s}</p><div class="kw">${x.k.map(k=>`<span>${k}</span>`).join("")}</div><div class="ac"><button class="sm p" data-a="o" data-v="${x.id}">Intelligence brief</button><button class="sm" data-a="s" data-v="${x.id}">${S.saved.includes(x.id)?"★ Saved":"☆ Save"}</button></div></article>`,
+fl=()=>{let L=(S.pg=="arch"?arch():live()).filter(x=>hit(x,S.q)&&(S.pg=="arch"||((S.u<0||x.u==S.u)&&(S.ty<0||x.ty==S.ty)&&(S.ch<0||x.ch==S.ch)&&(!S.sv||S.saved.includes(x.id)))));return `<p class="mu">${L.length} signal${L.length==1?"":"s"}</p>`+(L.map(card).join("")||`<div class="em">No signals match these filters.</div>`)},
+opt=(a,v)=>a.map((n,i)=>`<option value="${i}"${v==i?" selected":""}>${n}</option>`).join(""),
+PG={
+home(){const L=live(),n=SRC.reduce((a,c)=>a+c[1].split(",").length,0),av=L.length?(L.reduce((a,x)=>a+x.r,0)/L.length).toFixed(1):"–";
+return `<section class="hero"><small>GPN Intelligence Platform · ${CL[S.cl]}</small><h1>Spend less time searching, <em>more time acting.</em></h1><p>A centralised intelligence cockpit that monitors the regulatory landscape. A Digital Twin Analyst, configured to your products, markets and goals, tells you what is happening <i>to your business</i>, not just in the world.</p><button class="bt" data-a="pg" data-v="feed">Open live feed</button><button class="bt g" data-a="pg" data-v="chat">Ask the Digital Twin</button></section>
+<div class="kp"><div><b>${L.length}</b><span>Active signals</span></div><div><b>${L.filter(x=>x.u==0).length}</b><span>High urgency</span></div><div><b>${av}</b><span>Avg relevance / 10</span></div><div><b>${n}</b><span>Sources monitored</span></div></div>
+<h2>Priority signals</h2>${L.slice(0,3).map(card).join("")}
+<h2>How to use the dashboard</h2><div class="gr">${[["Monitor your feed","Watch a live stream of regulatory updates, competitor shifts and conference outcomes."],["Check relevance scores","The Digital Twin highlights what needs attention for your product lines."],["Review briefings","What happened, why it matters, and recommended next steps."],["Execute & share","Copy summaries for internal reports and share with teams."]].map((s,i)=>`<div><span class="n">Step ${i+1}</span><b>${s[0]}</b><span>${s[1]}</span></div>`).join("")}</div>
+<h2>Bespoke pharma & market access services</h2><div class="gr">${[["NHS Stakeholder Mapping","Profile decision-makers, ICS leads and KOLs."],["Formulary Overview & Access","Track local and national formulary inclusions."],["Insights Reports & Consultancy","Human-led analysis on trends, pricing and regulation."],["Advisory Boards & Education","Set up expert boards and accredited programmes."],["Strategic Alignment","Bridge AI-detected signals and commercial strategy."]].map(s=>`<div><b>${s[0]}</b><span>${s[1]}</span></div>`).join("")}</div>
+<p class="mu" style="margin-top:22px">Prototype · sample data built on public-source categories.</p>`},
+feed(){return `<h1>Intelligence Feed</h1><p class="mu">Last 30 days · ${S.geo?"All regions":"England + UK-wide"} · relevance ≥ ${S.min} · MHRA alerts stay until closed</p><div class="fb"><input data-f="q" placeholder="Search signals…" value="${esc(S.q)}">${["All","High","Medium","Low"].map((n,i)=>`<button class="chip${S.u==i-1?" on":""}" data-a="u" data-v="${i-1}">${n}</button>`).join("")}<select data-f="ty"><option value="-1">All types</option>${opt(TY,S.ty)}</select><select data-f="ch"><option value="-1">All channels</option>${opt(CH,S.ch)}</select><button class="chip${S.sv?" on":""}" data-a="sv">★ Saved</button></div><div id="fl">${fl()}</div>`},
+chan(){const L=live();return `<h1>Insight Channels</h1><p class="mu">Focused streams by domain. Select one to open it in the feed.</p><div class="gr">${CH.map((n,i)=>{const c=L.filter(x=>x.ch==i);return `<button class="ch" data-a="ch" data-v="${i}"><span class="n">${c.length} signals · ${c.filter(x=>x.u==0).length} high urgency</span><b>${n}</b><span>${SRC[i][1].split(",").length} sources</span></button>`}).join("")}</div>`},
+chat(){if(!S.chat.length)S.chat.push({r:"a",h:`Intelligence layer ready. I'm answering as your <b>${PE[S.pe][0]}</b> twin, grounded only in the signals in this dashboard.`});
+return `<h1>Ask the Digital Twin</h1><p class="mu">Simulated assistant grounded in the dashboard's signals. Persona: <select data-f="pe">${opt(PE.map(p=>p[0]),S.pe)}</select></p><div class="chat"><div id="cl">${cl()}</div><div class="sg">${["What needs action this month?","Summarise formulary risks","Latest MHRA alerts","Competitor activity","Recent NHS policy updates"].map(q=>`<button class="chip" data-a="sug" data-v="${q}">${q}</button>`).join("")}</div><div class="ci"><input id="ci" placeholder="Ask about NHS policy, MHRA, NICE, competitors…"><button class="bt" style="margin:0" data-a="send">Send</button></div></div>`},
+arch(){return `<h1>Archive</h1><p class="mu">Items older than 30 days. Searchable.</p><div class="fb"><input data-f="q" placeholder="Search archive…" value="${esc(S.q)}"></div><div id="fl">${fl()}</div>`},
+src(){return `<h1>Sources</h1><p class="mu">Monitored sources, grouped by channel.</p>`+SRC.map(c=>`<h2>${c[0]}</h2><div class="sl">${c[1].split(",").map(s=>{const p=s.split("|");return `<a href="https://${p[1]}" target="_blank" rel="noopener">${p[0]} ↗</a>`}).join("")}</div>`).join("")},
+set(){const sup=RAW.length-pool().length,hid=pool().filter(x=>x.r<S.min).length;return `<div class="st"><h1>Settings</h1><p class="mu">Client profile and filtering logic.</p>
+<label>Client workspace<select data-f="cl">${opt(CL,S.cl)}</select></label>
+<label>Digital Twin persona<select data-f="pe">${opt(PE.map(p=>p[0]),S.pe)}</select></label>
+<label>Minimum relevance: ${S.min}<input type="range" min="1" max="9" step="1" value="${S.min}" data-f="min"><span>Items below this score are hidden from the live feed (default 4).</span></label>
+<label>Geographic scope<select data-f="geo"><option value="0"${S.geo?"":" selected"}>England + UK-wide (default)</option><option value="1"${S.geo?" selected":""}>International view</option></select></label>
+<label>Appearance<button class="sm" data-a="th" style="width:140px">Toggle light / dark</button></label>
+<div class="rw"><span>Suppressed (no keyword match)</span><b>${sup}</b></div><div class="rw"><span>Hidden (low relevance)</span><b>${hid}</b></div><div class="rw"><span>Saved briefs</span><b>${S.saved.length}</b></div>
+<h2>Active keyword list (${KW.length})</h2><div class="kw">${KW.map(k=>`<span>${k}</span>`).join("")}</div>
+<p class="mu" style="margin-top:20px">Multi-client password-protected access needs a server-side login; this file is the front end.</p></div>`}
+},
+I=p=>`<svg viewBox="0 0 24 24" aria-hidden="true">${p}</svg>`,
+NAV=[["home",I('<path d="M4 11l8-7 8 7"/><path d="M6 10v9h12v-9"/>'),"Overview"],["feed",I('<path d="M5 6h14M5 12h14M5 18h9"/>'),"Intelligence Feed"],["chan",I('<rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/>'),"Channels"],["chat",I('<path d="M5 6h14a1 1 0 011 1v8a1 1 0 01-1 1h-7l-4 3v-3H5a1 1 0 01-1-1V7a1 1 0 011-1z"/>'),"Ask AI"],["arch",I('<rect x="4" y="5" width="16" height="4" rx="1"/><path d="M6 9v9a1 1 0 001 1h10a1 1 0 001-1V9M10 13h4"/>'),"Archive"],["src",I('<path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1"/>'),"Sources"],["set",I('<path d="M5 8h9M18 8h1M5 16h1M10 16h9"/><circle cx="16" cy="8" r="2"/><circle cx="8" cy="16" r="2"/>'),"Settings"]],
+cl=()=>S.chat.map(m=>`<div class="mg ${m.r}">${m.h}</div>`).join("");
+function R(){$("#nav").innerHTML=`<div class="br"><div class="lgo">G</div><div class="bt-t"><b>GPN Intelligence</b><small>Global Policy Network</small></div></div><button class="tgl" data-a="tg" aria-label="Collapse or expand sidebar" aria-expanded="${!$("#app").classList.contains("col")}" title="Collapse / expand">${I('<path d="M14 6l-6 6 6 6"/>')}</button>`+NAV.map(n=>`<button class="nv${S.pg==n[0]?" on":""}" data-a="pg" data-v="${n[0]}" title="${n[2]}">${n[1]}<span class="lb">${n[2]}</span></button>`).join("")+`<div class="sf"><div class="ws"><label for="ws">Workspace</label><select id="ws" data-f="cl">${opt(CL,S.cl)}</select></div><button class="nv" data-a="th" title="Light / dark">${I('<path d="M20 14.5A8 8 0 019.5 4 8 8 0 1020 14.5z"/>')}<span class="lb">Light / dark</span></button></div>`;$("#main").innerHTML=PG[S.pg]();$("main").scrollTop=0;if(S.pg=="chat")cs()}
+const cs=()=>{const c=$("#cl");if(c)c.scrollTop=c.scrollHeight},
+toast=m=>{const t=$("#to");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1600)};
+function cp(t){const fb=()=>{const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy");toast("Brief copied")}catch(e){toast("Copy not available")}a.remove()};try{navigator.clipboard.writeText(t).then(()=>toast("Brief copied"),fb)}catch(e){fb()}}
+function open(id,el){const x=RAW[id];$("#dp").innerHTML=`<div class="dh"><div class="meta"><span class="tg">${TY[x.ty]}</span><span class="ug ug${x.u}">${U[x.u]} urgency</span><span>Relevance ${x.r.toFixed(1)}/10</span></div><button class="sm rx" data-a="x" aria-label="Close">✕</button></div><h3>${x.t}</h3><p class="mu">${x.src} · ${dt(x.d)} · ${GEO[x.geo]}</p><h4>What happened</h4><p>${x.s}</p><h4>Strategic impact</h4><div class="bx">${IMP[x.ty]}</div><h4>Recommended action</h4><div class="bx">${ACT[x.ty]}</div><h4>What this means for you · ${PE[S.pe][0]}</h4><p>${lens(x)}</p><h4>Matched terms</h4><div class="kw">${x.k.map(k=>`<span>${k}</span>`).join("")}</div><div class="ac"><button class="sm p" data-a="cp" data-v="${id}">Copy brief</button><button class="sm" data-a="ask" data-v="${id}">Ask AI about this</button><button class="sm" data-a="s" data-v="${id}">${S.saved.includes(id)?"★ Saved":"☆ Save"}</button></div>`;const dr=$("#dr"),dp=$("#dp");if(el&&!dr.classList.contains("show")){const r=el.getBoundingClientRect();dp.style.setProperty("--dx",(r.left+r.width/2-innerWidth/2)+"px");dp.style.setProperty("--dy",(r.top+r.height/2-innerHeight/2)+"px");dp.scrollTop=0;dp.offsetWidth}dr.classList.add("show");setTimeout(()=>{const c=dp.querySelector(".rx");c&&c.focus({preventScroll:true})},60)}
+function ans(q){const l=q.toLowerCase(),w=(l.match(/[a-z0-9]+/g)||[]).filter(t=>t.length>3&&!/what|which|should|need|this|that|with|about|latest|recent|know|does|month|summarise/.test(t));
+let r=live().map(x=>{const h=(x.t+" "+x.s+" "+x.src+" "+TY[x.ty]+" "+x.k.join(" ")).toLowerCase();let s=w.filter(t=>h.includes(t)).length;if(/formulary/.test(l)&&x.ty==5)s+=2;if(/urgent|action|month|priority/.test(l)&&x.u==0)s+=2;if(/competitor/.test(l)&&x.ty==3)s+=2;if(/mhra|alert/.test(l)&&x.ty==1)s+=1;return[s,x]}).filter(a=>a[0]>0).sort((a,b)=>b[0]-a[0]||b[1].r-a[1].r).slice(0,3).map(a=>a[1]);
+if(!r.length)return "I couldn't find a matching signal in the current corpus. Try terms like MHRA, NICE, Formulary, ARRS, or “What needs action this month?”";
+return `Here is what the feed says, ranked by relevance:<ol>${r.map(x=>`<li><a data-a="o" data-v="${x.id}">${x.t}</a> <small>(${x.r.toFixed(1)}, ${U[x.u]})</small><br>${IMP[x.ty]}</li>`).join("")}</ol><b>What this means for you (${PE[S.pe][0]}):</b> ${lens(r[0])}`}
+function send(q){q=(q||"").trim();if(!q)return;S.chat.push({r:"u",h:esc(q)});$("#cl").innerHTML=cl();cs();setTimeout(()=>{S.chat.push({r:"a",h:ans(q)});if(S.pg=="chat"){$("#cl").innerHTML=cl();cs()}},450)}
+const sv=()=>{try{localStorage.setItem("gpn_sv",JSON.stringify(S.saved))}catch(e){}};
+document.addEventListener("click",e=>{const t=e.target.closest("[data-a]");if(!t)return;if(t.id=="dr"&&e.target!=t)return;const a=t.dataset.a,v=t.dataset.v;
+if(a=="pg"){S.pg=v;S.q="";R()}
+else if(a=="ch"){S.ch=+v;S.pg="feed";R()}
+else if(a=="u"){S.u=+v;R()}
+else if(a=="sv"){S.sv=!S.sv;R()}
+else if(a=="o")open(+v,t);
+else if(a=="tg"){const c=$("#app").classList.toggle("col");try{localStorage.setItem("gpn_sb",c?"1":"")}catch(e){}t.setAttribute("aria-expanded",!c)}
+else if(a=="x")$("#dr").classList.remove("show");
+else if(a=="s"){const i=+v,k=S.saved.indexOf(i);k<0?S.saved.push(i):S.saved.splice(k,1);sv();const o=$("#dr").classList.contains("show");R();if(o)open(i);toast(k<0?"Saved":"Removed")}
+else if(a=="cp")cp(brief(RAW[+v]));
+else if(a=="ask"){$("#dr").classList.remove("show");S.pg="chat";R();send("Tell me about: "+RAW[+v].t)}
+else if(a=="sug")send(v);
+else if(a=="send"){const i=$("#ci");send(i.value);i.value=""}
+else if(a=="th"){const d=(S.th||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"))=="dark";S.th=d?"light":"dark";document.documentElement.dataset.theme=S.th;try{localStorage.setItem("gpn_th",S.th)}catch(e){}}
+});
+document.addEventListener("keydown",e=>{if(e.key=="Escape")$("#dr").classList.remove("show");if(e.target.id=="ci"&&e.key=="Enter"){send(e.target.value);e.target.value=""}});
+document.addEventListener("input",e=>{if(e.target.dataset.f=="q"){S.q=e.target.value;$("#fl").innerHTML=fl()}});
+document.addEventListener("change",e=>{const f=e.target.dataset.f;if(!f||f=="q")return;S[f]=+e.target.value;if(f=="cl"||f=="pe")S.chat=[];R()});
+try{if(localStorage.getItem("gpn_sb")=="1")$("#app").classList.add("col")}catch(e){}
+R();
+</script></body></html>
